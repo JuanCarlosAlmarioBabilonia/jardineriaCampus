@@ -1,2 +1,3 @@
-from modules.getClientes import searchName
-searchName()
+import modules.getClientes as clientes
+from tabulate import tabulate
+print(tabulate(clientes.getAllClientPaisRegionCiudad("USA")))
