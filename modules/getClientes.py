@@ -75,3 +75,14 @@ def getAllClientTelefono():
         })
         clientTelefono.append(telefono)
     return(clientTelefono)
+def getAllNombreClienteEspañol():
+    clienteEspañol=[]
+    for val in cli.cliente:
+        if(val.get("pais")=="Spain"):
+            clienteEspañol.append(
+                {
+                "nombre_cliente": val.get("nombre_cliente"),
+                "pais":val.get("pais")  
+                }
+            )
+    return clienteEspañol

@@ -1,3 +1,6 @@
-import modules.getClientes as clientes
 from tabulate import tabulate
-print (tabulate(clientes.getAllClientTelefono()))
+import modules.getClientes as clientes
+import modules.getOficina as oficina
+import modules.getEmpleados as empleado
+import modules.getPedido as pedido
+print (tabulate(pedido.getEstadoPedido()))
