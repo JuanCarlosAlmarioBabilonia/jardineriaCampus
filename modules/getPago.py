@@ -13,5 +13,13 @@ def getAllPagosPaypal():
     for val in pa.pago:
         if(val.get("fecha_pago")>=("2008-01-01") and (val.get("fecha_pago")<=("2008-12-31")) and val.get("forma_pago")==("PayPal")):
             pagosPaypal.append(val)
-            pagosPaypal.sort()
-    return (pagosPaypal)
+            pagos_2008_paypal_ordenados = sorted(pagosPaypal, key=lambda x: x["total"], reverse=True)
+    return (pagos_2008_paypal_ordenados)
+def getAllFormasPago():
+    formasPago=[]
+    for val in pa.pago:
+        formapago=dict({
+        "pago": val.get("forma_pago"),
+        })
+        formasPago.append(formapago)
+    return formasPago
