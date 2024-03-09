@@ -1,15 +1,14 @@
 import storage.pedido as pe
 from datetime import datetime
-def getEstadoPedido():
+from tabulate import tabulate
+def getEstadoPedido(): #este ejercicio esta incompleto
     estadoPedido=[]
     for val in pe.pedido:
         pedido = dict({
-        "estado": val.get("estado"),
+        "Estado del Pedido": val.get("estado")
         })
         estadoPedido.append(pedido)
     return estadoPedido
-import storage.pedido as pe
-from datetime import datetime
 def getAllPedidosEntregadosDespuesDeTiempo():
     pedidosEntregados=[]
     for val in pe.pedido:
@@ -23,17 +22,25 @@ def getAllPedidosEntregadosDespuesDeTiempo():
             dif=end.date()-start.date()
             if(dif.days<0):
                 pedidosEntregados.append({
-                    "codigo_de_pedido":val.get("codigo_pedido"),
-                    "codigo_de_cliente":val.get("codigo_cliente"),
-                    "fecha_esperada":val.get("fecha_esperada"),
-                    "fecha_de_entrega":val.get("fecha_entrega")
+                    "Codigo del pedido":val.get("codigo_pedido"),
+                    "Codigo del cliente":val.get("codigo_cliente"),
+                    "Fecha esperada":val.get("fecha_esperada"),
+                    "Fecha de entrega":val.get("fecha_entrega")
                 })
     return pedidosEntregados
 def getAllPedidosRechazados():
     pedidosRechazados=[]
     for val in pe.pedido:
         if(val.get("fecha_pedido")>=("2009-01-01") and (val.get("fecha_pedido")<=("2009-12-31")) and (val.get("estado")==("Rechazado"))):
-            pedidosRechazados.append(val)
+            pedidosRechazados.append({
+                "Codigo del pedido":val.get("codigo_pedido"),
+                "Fecha del pedido":val.get("fecha_pedido"), 
+                "Fecha esperada":val.get("fecha_esperada"), 
+                "Fecha de entrega":val.get("fecha_entrega"), 
+                "Estado del pedido":val.get("estado"), 
+                "Comentario":val.get("comentario"), 
+                "Codigo del cliente":val.get("codigo_cliente")
+            })
     return pedidosRechazados
 def getAllPedidosEntregadoAntesDeTiempo():
     pedidosAntes=[]
@@ -48,10 +55,10 @@ def getAllPedidosEntregadoAntesDeTiempo():
             dif=end.date()-start.date()
             if(dif.days>=2):
                 pedidosAntes.append({
-                    "codigo_de_pedido":val.get("codigo_pedido"),
-                    "codigo_de_cliente":val.get("codigo_cliente"),
-                    "fecha_esperada":val.get("fecha_esperada"),
-                    "fecha_de_entrega":val.get("fecha_entrega")
+                    "Codigo del pedido":val.get("codigo_pedido"),
+                    "Codigo del cliente":val.get("codigo_cliente"),
+                    "Fecha esperada":val.get("fecha_esperada"),
+                    "Fecha de entrega":val.get("fecha_entrega")
                 })
     return pedidosAntes
 def getAllPedidosEntEnEnero():
@@ -63,13 +70,30 @@ def getAllPedidosEntEnEnero():
             start=datetime.strptime(date_1,"%d/%m/%Y")
             if(start.month==1) and val.get("estado")=="Entregado":
                 pedidosEnero.append({
-                    "codigo_de_pedido":val.get("codigo_pedido"),
-                    "codigo_de_cliente":val.get("codigo_cliente"),
-                    "fecha_de_entrega":val.get("fecha_entrega"),
-                    "estado":val.get("estado")
+                    "Codigo del pedido":val.get("codigo_pedido"),
+                    "Codigo del cliente":val.get("codigo_cliente"),
+                    "Fecha de entrega":val.get("fecha_entrega"),
+                    "Estado del pedido":val.get("estado")
                 })
     return pedidosEnero
-
-
-
-
+def menu():
+     print("""
+REPORTES DE LOS PEDIDOS
+1. Obtener los estados por los que puede pasar un pedido
+2. Obtener todos los pedidos entregados despues de tiempo
+3. Obtener todos los pedidos rechazados
+4. Obtener todos los pedidos entregados con 2 o mas dias de anticipacion
+5. Obtener todos los pedidos entregados en el mes de Enero de cualquier año
+""")
+     op=int(input("Seleccione una de las opciones: "))
+     if(op==1):#esta parte debe ser arreglada (codigo base incompleto)
+        print(tabulate(getEstadoPedido(),headers="keys",tablefmt="grid"))
+     elif(op==2):
+        print(tabulate(getAllPedidosEntregadosDespuesDeTiempo(),headers="keys",tablefmt="grid"))
+     elif(op==3):
+        print(tabulate(getAllPedidosRechazados(),headers="keys",tablefmt="grid"))
+     elif(op==4):
+        print(tabulate(getAllPedidosEntregadoAntesDeTiempo(),headers="keys",tablefmt="grid"))
+     elif(op==5):
+        print(tabulate(getAllPedidosEntEnEnero(),headers="keys",tablefmt="grid"))
+     

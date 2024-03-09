@@ -8,10 +8,11 @@ import modules.getProducto as producto
 def menu():
     print("""
 MENU PRINCIPAL
-1. Clientes
+1. Cliente
 2. Oficina
 3. Empleados
 4. Pedidos
+5. Pagos
 """)
     op=int(input("Seleccione una de las opciones: "))
     if(op==1):
@@ -22,4 +23,6 @@ MENU PRINCIPAL
         empleado.menu()
     elif(op==4):
         pedido.menu()
+    elif(op==5):
+        pago.menu()
 menu()
