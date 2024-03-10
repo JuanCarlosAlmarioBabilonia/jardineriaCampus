@@ -1,13 +1,18 @@
 import storage.pago as pa
 from tabulate import tabulate
-def getCodigoClientePago(): #este ejercicio esta incompleto
+def getCodigoClientePago(): 
     codigoCliente=[]
+    codigosVistos=set()
     for val in pa.pago:
-        if (val.get("fecha_pago")>("2008-01-01") and val.get("fecha_pago")<("2008-12-31") and val.get("codigo_cliente")!=("codigo_cliente")):
-            codigoCliente.append({
-                "Codigo del cliente":val.get("codigo_cliente"),
-                "Fecha del pago":val.get("fecha_pago")
-            })
+        if (val.get("fecha_pago")>("2008-01-01") and val.get("fecha_pago")<("2008-12-31")):
+            codigoClientes=val.get("codigo_cliente")
+            if codigoClientes not in codigosVistos:
+                codigoCliente.append({
+                    "Codigo del cliente":val.get("codigo_cliente"),
+                    "Fecha del pago":val.get("fecha_pago"),
+                    "Total":val.get("total")
+                })
+                codigosVistos.add(codigoClientes)
     return codigoCliente
 def getAllPagosPaypal():
     pagosPaypal=[]
@@ -22,13 +27,16 @@ def getAllPagosPaypal():
             })
             pagos_2008_paypal_ordenados = sorted(pagosPaypal, key=lambda x: x["total"], reverse=True)
     return (pagos_2008_paypal_ordenados)
-def getAllFormasPago(): #este ejercicio esta incompleto
+def getAllFormasPago(): 
     formasPago=[]
+    formasPagoVistas=set()
     for val in pa.pago:
-        formapago=dict({
-        "Pago": val.get("forma_pago"),
-        })
-        formasPago.append(formapago)
+        formaDePago=val.get("forma_pago")
+        if formaDePago not in formasPagoVistas:
+            formasPago.append({
+                "Formas de Pago": val.get("forma_pago"),
+            })
+            formasPagoVistas.add(formaDePago)
     return formasPago
 def menu():
     print("""

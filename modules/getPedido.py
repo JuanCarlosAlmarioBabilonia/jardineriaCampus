@@ -1,13 +1,16 @@
 import storage.pedido as pe
 from datetime import datetime
 from tabulate import tabulate
-def getEstadoPedido(): #este ejercicio esta incompleto
+def getEstadoPedido(): 
     estadoPedido=[]
+    estadoPedidoVistos=set()
     for val in pe.pedido:
-        pedido = dict({
-        "Estado del Pedido": val.get("estado")
-        })
-        estadoPedido.append(pedido)
+        estadoDePedidos=val.get("estado")
+        if estadoDePedidos not in estadoPedidoVistos:
+            estadoPedido.append({
+                "Estados del Pedido": val.get("estado")
+            })
+            estadoPedidoVistos.add(estadoDePedidos)
     return estadoPedido
 def getAllPedidosEntregadosDespuesDeTiempo():
     pedidosEntregados=[]
@@ -86,7 +89,7 @@ REPORTES DE LOS PEDIDOS
 5. Obtener todos los pedidos entregados en el mes de Enero de cualquier año
 """)
      op=int(input("Seleccione una de las opciones: "))
-     if(op==1):#esta parte debe ser arreglada (codigo base incompleto)
+     if(op==1):
         print(tabulate(getEstadoPedido(),headers="keys",tablefmt="grid"))
      elif(op==2):
         print(tabulate(getAllPedidosEntregadosDespuesDeTiempo(),headers="keys",tablefmt="grid"))
