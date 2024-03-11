@@ -44,20 +44,24 @@ def getAllExtensionEmailEmp():
         })
     return exEm
 def menu():
-    print("""
+    while True:
+      print("""
 REPORTES DE LOS EMPLEADOS
+0. Regresar al menu principal
 1. Obtener datos basicos de los empleados por el codigo ingresado
 2. Obtener los datos basicos del Jefe
 3. Obtener los datos basicos de los empleados cuyo puesto no sea Representante de Ventas
 4. Obtener los emails y extensiones de todos los empleados
 """)
-    op=int(input("Seleccione una de las opciones: "))
-    if(op==1):
+      op=int(input("Seleccione una de las opciones: "))
+      if(op==1):
         codigo=int(input("Ingrese el codigo: "))   
         print(tabulate(getAllNombreApellidoEmailJefe(codigo),headers="keys",tablefmt="grid"))
-    elif(op==2):
+      elif(op==2):
         print(tabulate(getAllNombreApellidoEmailJefe2(),headers="keys",tablefmt="grid"))
-    elif(op==3):
+      elif(op==3):
         print(tabulate(getAllNombreApellidoPuestoEmNoRep(),headers="keys",tablefmt="grid"))
-    elif(op==4):
-        print(tabulate(getAllExtensionEmailEmp(),headers="keys",tablefmt="grid")) 
+      elif(op==4):
+        print(tabulate(getAllExtensionEmailEmp(),headers="keys",tablefmt="grid"))
+      elif(op==0):
+          break 

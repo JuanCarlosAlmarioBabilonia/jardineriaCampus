@@ -128,8 +128,10 @@ def getAllNombreClienteEspañol():
             )
     return clienteEspañol
 def menu():
-    print("""
+    while True:
+        print("""
 REPORTES DE LOS CLIENTES
+0. Regresar al menu principal
 1. Obtener todos los clientes (codigo y nombre)
 2. Obtener un cliente por el codigo
 3. Obtener toda la informacion de un cliente segun su limite de credito y ciudad a la que pertenece (ejem: 3000.0 - San Francisco)
@@ -141,31 +143,33 @@ REPORTES DE LOS CLIENTES
 9. Obtener el telefono de todos los clientes
 10. Obtener el nombre de todos los clientes españoles
 """)
-    op=int(input("Seleccione una de las opciones: "))
-    if(op==1):
-        print(tabulate(getAllClientesName(),headers="keys",tablefmt="grid"))
-    elif(op==2):
-        codigoCliente=int(input("Ingrese el codigo del cliente: "))
-        print(tabulate(getOneClientCodigo(codigoCliente),headers="keys",tablefmt="grid"))
-    elif(op==3):
-        limite=float(input("Ingrese el limite de credito de los clientes que desea visualizar: "))
-        ciudad=input("Ingrese el nombre de la ciudad de la que desea filtrar los clientes: ")
-        print(tabulate(getAllClientCreditoCiudad(limite,ciudad),headers="keys",tablefmt="grid"))
-    elif(op==4):
-        pais=input("Ingrese el pais del cliente con mayuscula(s) inicial(es): ")
-        region=input("Ingrese la region del cliente con mayuscula(s) inicial(es): ")
-        ciudad=input("Ingrese la ciudad del cliente con mayuscula(s) inicial(es): ")
-        print(tabulate(getAllClientPaisRegionCiudad(pais,region,ciudad),headers="keys",tablefmt="grid"))
-    elif(op==5):
-        print(tabulate(getAllClientCodigoPostal(),headers="keys",tablefmt="grid"))
-    elif(op==6):
-        ciudad=input("Ingrese la ciudad con mayuscula(s) inicial(es): ")
-        print(tabulate(getAllClientCiudad(ciudad),headers="keys",tablefmt="grid"))
-    elif(op==7):
-        print(tabulate(getAllClientDireccion(),headers="keys",tablefmt="grid"))
-    elif(op==8):
-        print(tabulate(getAllClientCreditEntre(),headers="keys",tablefmt="grid"))
-    elif(op==9):
-        print(tabulate(getAllClientCreditEntre(),headers="keys",tablefmt="grid"))
-    elif(op==10):
+        op=int(input("Seleccione una de las opciones: "))
+        if(op==1):
+            print(tabulate(getAllClientesName(),headers="keys",tablefmt="grid"))
+        elif(op==2):
+         codigoCliente=int(input("Ingrese el codigo del cliente: "))
+         print(tabulate(getOneClientCodigo(codigoCliente),headers="keys",tablefmt="grid"))
+        elif(op==3):
+         limite=float(input("Ingrese el limite de credito de los clientes que desea visualizar: "))
+         ciudad=input("Ingrese el nombre de la ciudad de la que desea filtrar los clientes: ")
+         print(tabulate(getAllClientCreditoCiudad(limite,ciudad),headers="keys",tablefmt="grid"))
+        elif(op==4):
+         pais=input("Ingrese el pais del cliente con mayuscula(s) inicial(es): ")
+         region=input("Ingrese la region del cliente con mayuscula(s) inicial(es): ")
+         ciudad=input("Ingrese la ciudad del cliente con mayuscula(s) inicial(es): ")
+         print(tabulate(getAllClientPaisRegionCiudad(pais,region,ciudad),headers="keys",tablefmt="grid"))
+        elif(op==5):
+         print(tabulate(getAllClientCodigoPostal(),headers="keys",tablefmt="grid"))
+        elif(op==6):
+         ciudad=input("Ingrese la ciudad con mayuscula(s) inicial(es): ")
+         print(tabulate(getAllClientCiudad(ciudad),headers="keys",tablefmt="grid"))
+        elif(op==7):
+         print(tabulate(getAllClientDireccion(),headers="keys",tablefmt="grid"))
+        elif(op==8):
+         print(tabulate(getAllClientCreditEntre(),headers="keys",tablefmt="grid"))
+        elif(op==9):
+         print(tabulate(getAllClientCreditEntre(),headers="keys",tablefmt="grid"))
+        elif(op==10):
          print(tabulate(getAllNombreClienteEspañol(),headers="keys",tablefmt="grid"))
+        elif(op==0):
+            break

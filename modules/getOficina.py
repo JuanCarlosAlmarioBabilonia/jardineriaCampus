@@ -32,17 +32,21 @@ def getAllDirecciones():
             })
     return direccion   
 def menu():
-    print("""
+    while True:
+     print("""
 REPORTES DE LAS OFICINAS
+0. Regresar al menu principal
 1. Obtener los codigos de las todas oficinas y las ciudades de ubicacion
 2. Obtener el telefono de todas las oficinas del pais ingresado
 3. Obtener las direcciones de todas las oficinas
 """)
-    op=int(input("Seleccione una de las opciones: "))
-    if(op==1):
+     op=int(input("Seleccione una de las opciones: "))
+     if(op==1):
         print(tabulate(getAllCodigoCiudad(),headers="keys",tablefmt="grid"))
-    elif(op==2):
+     elif(op==2):
         pais=input("Ingrese el pais con mayuscula(s) inicial(es): ")
         print(tabulate(getAllCiudadTelefono(pais),headers="keys",tablefmt="grid"))
-    elif(op==3):
+     elif(op==3):
         print(tabulate(getAllDirecciones(),headers="keys",tablefmt="grid"))
+     elif (op==0):
+        break

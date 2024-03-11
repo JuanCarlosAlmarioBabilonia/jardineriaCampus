@@ -80,8 +80,10 @@ def getAllPedidosEntEnEnero():
                 })
     return pedidosEnero
 def menu():
+    while True:
      print("""
 REPORTES DE LOS PEDIDOS
+0. Regresar al menu principal
 1. Obtener los estados por los que puede pasar un pedido
 2. Obtener todos los pedidos entregados despues de tiempo
 3. Obtener todos los pedidos rechazados
@@ -99,4 +101,6 @@ REPORTES DE LOS PEDIDOS
         print(tabulate(getAllPedidosEntregadoAntesDeTiempo(),headers="keys",tablefmt="grid"))
      elif(op==5):
         print(tabulate(getAllPedidosEntEnEnero(),headers="keys",tablefmt="grid"))
+     elif (op==0):
+        break
      

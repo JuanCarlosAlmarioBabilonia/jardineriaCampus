@@ -39,16 +39,20 @@ def getAllFormasPago():
             formasPagoVistas.add(formaDePago)
     return formasPago
 def menu():
-    print("""
+    while True:
+     print("""
 REPORTES DE LOS PAGOS
+0. Regresar al menu principal
 1. Obtener todos los pagos realizados en 2008
 2. Obtener todos los pagos realizados por PayPal
 3. Obtener las diferentes formas de pago existentes
 """)
-    op=int(input("Seleccione una de las opciones: "))
-    if(op==1):
+     op=int(input("Seleccione una de las opciones: "))
+     if(op==1):
         print(tabulate(getCodigoClientePago(),headers="keys",tablefmt="grid"))
-    elif(op==2):
+     elif(op==2):
         print(tabulate(getAllPagosPaypal(),headers="keys",tablefmt="grid"))
-    elif(op==3):
+     elif(op==3):
         print(tabulate(getAllFormasPago(),headers="keys",tablefmt="grid"))
+     elif (op==0):
+        break
