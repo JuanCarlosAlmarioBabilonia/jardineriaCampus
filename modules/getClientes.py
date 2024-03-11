@@ -147,17 +147,26 @@ REPORTES DE LOS CLIENTES
         if(op==1):
             print(tabulate(getAllClientesName(),headers="keys",tablefmt="grid"))
         elif(op==2):
-         codigoCliente=int(input("Ingrese el codigo del cliente: "))
-         print(tabulate(getOneClientCodigo(codigoCliente),headers="keys",tablefmt="grid"))
+            try:
+               codigoCliente=int(input("Ingrese el codigo del cliente: "))
+               print(tabulate(getOneClientCodigo(codigoCliente),headers="keys",tablefmt="grid"))
+            except KeyboardInterrupt:
+               menu()         
         elif(op==3):
-         limite=float(input("Ingrese el limite de credito de los clientes que desea visualizar: "))
-         ciudad=input("Ingrese el nombre de la ciudad de la que desea filtrar los clientes: ")
-         print(tabulate(getAllClientCreditoCiudad(limite,ciudad),headers="keys",tablefmt="grid"))
+            try:
+               limite=float(input("Ingrese el limite de credito de los clientes que desea visualizar: "))
+               ciudad=input("Ingrese el nombre de la ciudad de la que desea filtrar los clientes: ")
+               print(tabulate(getAllClientCreditoCiudad(limite,ciudad),headers="keys",tablefmt="grid"))
+            except KeyboardInterrupt:
+               menu()              
         elif(op==4):
-         pais=input("Ingrese el pais del cliente con mayuscula(s) inicial(es): ")
-         region=input("Ingrese la region del cliente con mayuscula(s) inicial(es): ")
-         ciudad=input("Ingrese la ciudad del cliente con mayuscula(s) inicial(es): ")
-         print(tabulate(getAllClientPaisRegionCiudad(pais,region,ciudad),headers="keys",tablefmt="grid"))
+            try:
+               pais=input("Ingrese el pais del cliente con mayuscula(s) inicial(es): ")
+               region=input("Ingrese la region del cliente con mayuscula(s) inicial(es): ")
+               ciudad=input("Ingrese la ciudad del cliente con mayuscula(s) inicial(es): ")
+               print(tabulate(getAllClientPaisRegionCiudad(pais,region,ciudad),headers="keys",tablefmt="grid"))
+            except KeyboardInterrupt:
+               menu()
         elif(op==5):
          print(tabulate(getAllClientCodigoPostal(),headers="keys",tablefmt="grid"))
         elif(op==6):
