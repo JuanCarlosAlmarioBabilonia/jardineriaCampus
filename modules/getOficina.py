@@ -44,8 +44,11 @@ REPORTES DE LAS OFICINAS
      if(op==1):
         print(tabulate(getAllCodigoCiudad(),headers="keys",tablefmt="grid"))
      elif(op==2):
-        pais=input("Ingrese el pais con mayuscula(s) inicial(es): ")
-        print(tabulate(getAllCiudadTelefono(pais),headers="keys",tablefmt="grid"))
+        try:
+            pais=input("Ingrese el pais con mayuscula(s) inicial(es): ")
+            print(tabulate(getAllCiudadTelefono(pais),headers="keys",tablefmt="grid"))
+        except KeyboardInterrupt:
+            return menu()
      elif(op==3):
         print(tabulate(getAllDirecciones(),headers="keys",tablefmt="grid"))
      elif (op==0):

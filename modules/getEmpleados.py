@@ -55,8 +55,11 @@ REPORTES DE LOS EMPLEADOS
 """)
       op=int(input("Seleccione una de las opciones: "))
       if(op==1):
-        codigo=int(input("Ingrese el codigo: "))   
-        print(tabulate(getAllNombreApellidoEmailJefe(codigo),headers="keys",tablefmt="grid"))
+        try:
+            codigo=int(input("Ingrese el codigo: "))   
+            print(tabulate(getAllNombreApellidoEmailJefe(codigo),headers="keys",tablefmt="grid"))
+        except KeyboardInterrupt:
+           return menu()
       elif(op==2):
         print(tabulate(getAllNombreApellidoEmailJefe2(),headers="keys",tablefmt="grid"))
       elif(op==3):

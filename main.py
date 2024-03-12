@@ -15,7 +15,8 @@ MENU PRINCIPAL
 3. Empleados
 4. Pedidos
 5. Pagos
-""")
+6. Productos
+ """)
         op=int(input("Seleccione una de las opciones: "))
         if(op==1):
             clientes.menu()
@@ -27,7 +28,8 @@ MENU PRINCIPAL
             pedido.menu()
         elif(op==5):
             pago.menu()
+        elif(op==6):
+            producto.menu()
         elif(op==0):
             break
 menu()
-#print(tabulate(producto.getAllProductosOrnamentales("Ornamentales",4)))

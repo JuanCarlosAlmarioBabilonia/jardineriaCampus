@@ -25,8 +25,8 @@ def getAllPagosPaypal():
                 "Fecha del pago":val.get("fecha_pago"),
                 "Total":val.get("total")
             })
-            pagos_2008_paypal_ordenados = sorted(pagosPaypal, key=lambda x: x["total"], reverse=True)
-    return (pagos_2008_paypal_ordenados)
+            pagosPaypal= sorted(pagosPaypal, key=lambda x: x["Total"], reverse=True)
+    return pagosPaypal
 def getAllFormasPago(): 
     formasPago=[]
     formasPagoVistas=set()
