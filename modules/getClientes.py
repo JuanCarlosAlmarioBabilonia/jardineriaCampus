@@ -1,4 +1,5 @@
 import storage.cliente as cli
+import storage.empleado as em
 from tabulate import tabulate
 def getAllClientesName():
     clienteName = list()
@@ -127,6 +128,19 @@ def getAllNombreClienteEspañol():
                 }
             )
     return clienteEspañol
+def getAllClienteCiudadRepVentas():
+    clienteMadrid=[]
+    for val in cli.cliente:
+        if((val.get("ciudad")=="Madrid") and (val.get("codigo_empleado_rep_ventas")== 11 or (val.get("codigo_empleado_rep_ventas")== 30))):
+            clienteMadrid.append({
+        "Codigo del cliente":val.get("codigo_cliente"),
+        "Nombre del cliente":val.get("nombre_cliente"),
+        "Nombre del contacto":val.get("nombre_contacto"),
+        "Apellido del contacto":val.get("apellido_contacto"),
+        "Ciudad": val.get("ciudad"),
+        "Codigo del representante de ventas":val.get("codigo_empleado_rep_ventas")
+        })
+    return clienteMadrid
 def menu():
     while True:
         print("""
@@ -142,6 +156,7 @@ REPORTES DE LOS CLIENTES
 8. Obtener todos los clientes que posean un credito entre 5000 y 10000
 9. Obtener el telefono de todos los clientes
 10. Obtener el nombre de todos los clientes españoles
+11. Obtener los clientes que son de Madrid y que el codigo de su representante de ventas sea 11 o 30
 """)
         op=int(input("Seleccione una de las opciones: "))
         if(op==1):
@@ -183,5 +198,7 @@ REPORTES DE LOS CLIENTES
          print(tabulate(getAllClientCreditEntre(),headers="keys",tablefmt="grid"))
         elif(op==10):
          print(tabulate(getAllNombreClienteEspañol(),headers="keys",tablefmt="grid"))
+        elif(op==11):
+         print(tabulate(getAllClienteCiudadRepVentas(),headers="keys",tablefmt="grid"))
         elif(op==0):
             break
