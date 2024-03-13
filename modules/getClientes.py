@@ -1,5 +1,6 @@
 import storage.cliente as cli
 import storage.empleado as em
+import storage.pago as pa
 from tabulate import tabulate
 def getAllClientesName():
     clienteName = list()
@@ -141,6 +142,50 @@ def getAllClienteCiudadRepVentas():
         "Codigo del representante de ventas":val.get("codigo_empleado_rep_ventas")
         })
     return clienteMadrid
+def getAllClientesReps():
+    clientesRep=[]
+    for x in cli.cliente:
+        for y in em.empleado:
+            if x.get("codigo_empleado_rep_ventas")==y.get("codigo_empleado"):
+                clientesRep.append({
+                    "Nombre del cliente": x.get("nombre_cliente"),
+                    "Nombre del Representante de Ventas":y.get("nombre"),
+                    "Apellidos del Representante de Ventas":f"{y.get('apellido1')} {y.get('apellido2')}" 
+                })
+    return clientesRep
+def getAllClientesPagos():
+    clientesPago=[]
+    for x in cli.cliente:
+        for y in em.empleado:
+            for z in pa.pago:
+                if x.get("codigo_cliente")==z.get("codigo_cliente") and x.get("codigo_empleado_rep_ventas")==y.get("codigo_empleado") :
+                    clientesPago.append({
+                        "Codigo del cliente":x.get("codigo_cliente"),
+                        "Nombre del cliente": x.get("nombre_cliente"),
+                        "Pago":z.get("total"),
+                        "Nombre del Representante de Ventas":y.get("nombre"),
+                        "Apellidos del Representante de Ventas":f"{y.get('apellido1')} {y.get('apellido2')}"                         
+                    })
+    return clientesPago
+def getAllClientesNoPagos():
+    clientesNoPago=[]
+    for a in cli.cliente:
+       pagos=False
+       for b in pa.pago:
+          if a.get("codigo_cliente")==b.get("codigo_cliente"):
+             pagos=True
+             break
+          if not pagos:
+             for c in em.empleado:
+                if a.get("codigo_empleado_rep_ventas")==c.get("codigo_empleado"):
+                   if c.get("puesto")=="Representante Ventas":
+                      clientesNoPago.append({
+                         "Codigo del cliente": a.get("codigo_cliente"),
+                         "Nombre del cliente": a.get("nombre_cliente"),
+                         "Puesto": c.get("puesto"),
+                         "Representante de ventas": c.get("nombre")
+                      })
+    return clientesNoPago
 def menu():
     while True:
         print("""
@@ -157,6 +202,9 @@ REPORTES DE LOS CLIENTES
 9. Obtener el telefono de todos los clientes
 10. Obtener el nombre de todos los clientes españoles
 11. Obtener los clientes que son de Madrid y que el codigo de su representante de ventas sea 11 o 30
+12. Obtener todos los clientes con su respectivo Representante de Ventas 
+13. Obtener todos los clientes que hayan realizado pagos con su respectivo Representante de Ventas
+14. Obtener todos los clientes que no hayan realizado pagos con su respectivo Representante de Ventas
 """)
         op=int(input("Seleccione una de las opciones: "))
         if(op==1):
@@ -200,5 +248,11 @@ REPORTES DE LOS CLIENTES
          print(tabulate(getAllNombreClienteEspañol(),headers="keys",tablefmt="grid"))
         elif(op==11):
          print(tabulate(getAllClienteCiudadRepVentas(),headers="keys",tablefmt="grid"))
+        elif(op==12):
+         print(tabulate(getAllClientesReps(),headers="keys",tablefmt="grid")) 
+        elif(op==13):
+         print(tabulate(getAllClientesPagos(),headers="keys",tablefmt="grid")) 
+        elif(op==14):
+         print(tabulate(getAllClientesNoPagos(),headers="keys",tablefmt="grid"))   
         elif(op==0):
             break
