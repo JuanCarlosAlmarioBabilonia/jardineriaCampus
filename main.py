@@ -5,6 +5,7 @@ import modules.getEmpleados as empleado
 import modules.getPedido as pedido
 import modules.getPago as pago
 import modules.getProducto as producto
+import modules.postProducto as postproducto
 def menu():
     while True:
         print("""

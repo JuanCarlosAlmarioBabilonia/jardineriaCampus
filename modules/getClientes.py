@@ -167,25 +167,25 @@ def getAllClientesPagos():
                         "Apellidos del Representante de Ventas":f"{y.get('apellido1')} {y.get('apellido2')}"                         
                     })
     return clientesPago
-def getAllClientesNoPagos():
-    clientesNoPago=[]
-    for a in cli.cliente:
-       pagos=False
-       for b in pa.pago:
-          if a.get("codigo_cliente")==b.get("codigo_cliente"):
-             pagos=True
-             break
-          if not pagos:
-             for c in em.empleado:
-                if a.get("codigo_empleado_rep_ventas")==c.get("codigo_empleado"):
-                   if c.get("puesto")=="Representante Ventas":
-                      clientesNoPago.append({
-                         "Codigo del cliente": a.get("codigo_cliente"),
-                         "Nombre del cliente": a.get("nombre_cliente"),
-                         "Puesto": c.get("puesto"),
-                         "Representante de ventas": c.get("nombre")
-                      })
-    return clientesNoPago
+# def getAllClientesNoPagos():
+#     clientesNoPago=[]
+#     for a in cli.cliente:
+#        pagos=False
+#        for b in pa.pago:
+#           if a.get("codigo_cliente")==b.get("codigo_cliente"):
+#              pagos=True
+#              break
+#           if not pagos:
+#              for c in em.empleado:
+#                 if a.get("codigo_empleado_rep_ventas")==c.get("codigo_empleado"):
+#                    if c.get("puesto")=="Representante Ventas":
+#                       clientesNoPago.append({
+#                          "Codigo del cliente": a.get("codigo_cliente"),
+#                          "Nombre del cliente": a.get("nombre_cliente"),
+#                          "Puesto": c.get("puesto"),
+#                          "Representante de ventas": c.get("nombre")
+#                       })
+#     return clientesNoPago
 def menu():
     while True:
         print("""
@@ -252,7 +252,7 @@ REPORTES DE LOS CLIENTES
          print(tabulate(getAllClientesReps(),headers="keys",tablefmt="grid")) 
         elif(op==13):
          print(tabulate(getAllClientesPagos(),headers="keys",tablefmt="grid")) 
-        elif(op==14):
-         print(tabulate(getAllClientesNoPagos(),headers="keys",tablefmt="grid"))   
+        # elif(op==14):
+        #  print(tabulate(getAllClientesNoPagos(),headers="keys",tablefmt="grid"))   
         elif(op==0):
             break
