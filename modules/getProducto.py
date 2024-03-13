@@ -1,7 +1,7 @@
 import requests
 import json
 from tabulate import tabulate
-import postProducto as psp
+import modules.postProducto as psp
 def getAllData():
     pet=requests.get("http://172.16.100.133:5503")
     data=pet.json()
@@ -42,15 +42,15 @@ REPORTES DE LOS PRODUCTOS
             print(tabulate(getAllProductosOrnamentales(gama,stock),headers="keys",tablefmt="grid"))
         elif(op==2):
             producto = {
-            "Codigo del Producto": input("Ingrese el nombre del producto"),
-            "Nombre":input("Ingrese el nombre del producto"),
-            "Gama":input("Ingrese la gama del producto"),
-            "Dimensiones":input("Ingrese la dimensiones del producto"),
-            "Proveedor":input("Ingrese el proveedor del producto"),
-            "Descripcion":input("Ingrese la descripcion del producto"),
-            "Cantidad Stock":int(input("Ingrese la cantidad en stock")), 
-            "Precio de venta":int(input("Ingrese el precio de venta")), 
-            "Precio al proveedor":int(input("Ingrese el precio al proveedor"))
+            "Codigo del Producto": input("Ingrese el codigo del producto: "),
+            "Nombre":input("Ingrese el nombre del producto: "),
+            "Gama":input("Ingrese la gama del producto: "),
+            "Dimensiones":input("Ingrese la dimensiones del producto: "),
+            "Proveedor":input("Ingrese el proveedor del producto: "),
+            "Descripcion":input("Ingrese la descripcion del producto: "),
+            "Cantidad Stock":int(input("Ingrese la cantidad en stock: ")), 
+            "Precio de venta":int(input("Ingrese el precio de venta: ")), 
+            "Precio al proveedor":int(input("Ingrese el precio al proveedor: "))
         }
             psp.postProducto(producto)
             print("Producto Guardado")
