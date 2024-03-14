@@ -1,4 +1,4 @@
-from tabulate import tabulate
+# from tabulate import tabulate
 import modules.getClientes as clientes
 import modules.getOficina as oficina
 import modules.getEmpleados as empleado
@@ -6,6 +6,21 @@ import modules.getPedido as pedido
 import modules.getPago as pago
 import modules.getProducto as producto
 import modules.postProducto as postproducto
+def menuProducto():
+    while True:
+        print("""
+MENU DE PRODUCTOS
+0. Regresar al menu principal
+1. Obtener productos de una categoria ordenando su precio de venta y rectificando que su cantidad de stock sea superior
+2. Guardar datos
+              """)
+        op=int(input("Seleccione una de las opciones: "))
+        if(op==1):
+            producto.menu()
+        elif(op==2):
+            postproducto.menu()
+        elif(op==0):
+            break
 def menu():
     while True:
         print("""
@@ -30,7 +45,7 @@ MENU PRINCIPAL
         elif(op==5):
             pago.menu()
         elif(op==6):
-            producto.menu()
+            menuProducto()
         elif(op==0):
             break
 menu()
