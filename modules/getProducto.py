@@ -1,11 +1,10 @@
 import requests
+import os
 from tabulate import tabulate
-import modules.getGamas as gG
 def getAllData():
-    pet=requests.get("http://172.16.100.133:5503")
+    pet=requests.get("http://172.16.103.39:5503")
     data=pet.json()
     return data
-import json
 def getAllProductosOrnamentales(gama,stock):
     condiciones=[]
     for val in getAllData():
@@ -19,9 +18,6 @@ def getAllProductosOrnamentales(gama,stock):
         "Codigo del Producto":val.get("codigo_producto"),
         "Nombre":val.get("nombre"),  
         "Gama":val.get("gama"),  
-        "Dimensiones":val.get("dimensiones"),  
-        "Proveedor":val.get("proveedor"), 
-        "Descripcion":f'{val.get("descripcion")[:5]}...' if condiciones[i].get("descripcion") else None,
         "Cantidad en stock":val.get("cantidad_en_stock"),  
         "Precio de venta":val.get("precio_venta"),  
         "Precio al proveedor":val.get("precio_proveedor")      
@@ -29,6 +25,7 @@ def getAllProductosOrnamentales(gama,stock):
     return condiciones
 def menu():
     while True:
+        os.system("clear")
         print("""
 REPORTES DE LOS PRODUCTOS
 0. Regresar al menu principal
@@ -36,9 +33,9 @@ REPORTES DE LOS PRODUCTOS
 """)
         op=int(input("Seleccione una de las opciones: "))
         if (op==1):
-            gama=gG.getAllNombre()[int(input("Selecione la gama:\n"+"".join([f"\t{i}. {val}\n" for i, val in enumerate(gG.getAllNombre())])))],
+            gama= input("Ingrese la gama: ")
             stock=int(input("Ingrese el stock del producto: "))
-            print(tabulate(getAllProductosOrnamentales(gama,stock),headers="keys",tablefmt="github"))
-            input("Precione una tecla para continuar.....")
+            print(tabulate(getAllProductosOrnamentales(gama,stock),tablefmt="grid"))
+            input("Presiona cualquier tecla para continuar.....")
         elif(op==0):
             break

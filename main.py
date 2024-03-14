@@ -1,4 +1,3 @@
-# from tabulate import tabulate
 import modules.getClientes as clientes
 import modules.getOficina as oficina
 import modules.getEmpleados as empleado
@@ -6,8 +5,10 @@ import modules.getPedido as pedido
 import modules.getPago as pago
 import modules.getProducto as producto
 import modules.postProducto as postproducto
+import os
 def menuProducto():
     while True:
+        os.system("clear")
         print("""
 MENU DE PRODUCTOS
 0. Regresar al menu principal
@@ -21,8 +22,9 @@ MENU DE PRODUCTOS
             postproducto.menu()
         elif(op==0):
             break
-def menu():
+if(__name__ == "__main__"):
     while True:
+        os.system("clear")
         print("""
 MENU PRINCIPAL
 0. Salir
@@ -48,4 +50,3 @@ MENU PRINCIPAL
             menuProducto()
         elif(op==0):
             break
-menu()
