@@ -5,6 +5,11 @@ import modules.getPedido as pedido
 import modules.getPago as pago
 import modules.getProducto as producto
 import modules.postProducto as postproducto
+import modules.postCliente as postCliente
+import modules.postEmpleados as postEmpleado
+import modules.postPagos as postPagos
+import modules.postOficina as postOficina
+import modules.postPedido as postPedido
 import os
 def menuProducto():
     while True:
@@ -12,7 +17,7 @@ def menuProducto():
         print("""
 MENU DE PRODUCTOS
 0. Regresar al menu principal
-1. Obtener productos de una categoria ordenando su precio de venta y rectificando que su cantidad de stock sea superior
+1. Redireccionar a los filtros
 2. Guardar datos
               """)
         op=int(input("Seleccione una de las opciones: "))
@@ -22,6 +27,86 @@ MENU DE PRODUCTOS
             postproducto.menu()
         elif(op==0):
             break
+def menuCliente():
+    while True:
+        os.system("clear")
+        print("""
+MENU DE CLIENTES
+0. Regresar al menu principal
+1. Redireccionar a los filtros
+2. Guardar datos
+              """)
+        op=int(input("Seleccione una de las opciones: "))
+        if(op==1):
+            clientes.menu()
+        elif(op==2):
+           postCliente.menu()
+        elif(op==0):
+            break
+def menuEmpleado():
+    while True:
+        os.system("clear")
+        print("""
+MENU DE EMPLEADOS
+0. Regresar al menu principal
+1. Redireccionar a los filtros
+2. Guardar datos
+              """)
+        op=int(input("Seleccione una de las opciones: "))
+        if(op==1):
+            empleado.menu()
+        elif(op==2):
+           postEmpleado.menu()
+        elif(op==0):
+            break
+def menuPagos():
+    while True:
+        os.system("clear")
+        print("""
+MENU DE PAGOS
+0. Regresar al menu principal
+1. Redireccionar a los filtros
+2. Guardar datos
+              """)
+        op=int(input("Seleccione una de las opciones: "))
+        if(op==1):
+            pago.menu()
+        elif(op==2):
+           postPagos.menu()
+        elif(op==0):
+            break
+def menuOficina():
+    while True:
+        os.system("clear")
+        print("""
+MENU DE OFICINA
+0. Regresar al menu principal
+1. Redireccionar a los filtros
+2. Guardar datos
+              """)
+        op=int(input("Seleccione una de las opciones: "))
+        if(op==1):
+            oficina.menu()
+        elif(op==2):
+           postOficina.menu()
+        elif(op==0):
+            break
+def menuPedidos():
+    while True:
+        os.system("clear")
+        print("""
+MENU DE PEDIDOS
+0. Regresar al menu principal
+1. Redireccionar a los filtros
+2. Guardar datos
+              """)
+        op=int(input("Seleccione una de las opciones: "))
+        if(op==1):
+            pedido.menu()
+        elif(op==2):
+           postPedido.menu()
+        elif(op==0):
+            break  
 if(__name__ == "__main__"):
     while True:
         os.system("clear")
@@ -37,15 +122,15 @@ MENU PRINCIPAL
  """)
         op=int(input("Seleccione una de las opciones: "))
         if(op==1):
-            clientes.menu()
+            menuCliente()
         elif(op==2):
-            oficina.menu()
+            menuOficina()
         elif(op==3):
-            empleado.menu()
+            menuEmpleado()
         elif(op==4):
-            pedido.menu()
+            menuPedidos()
         elif(op==5):
-            pago.menu()
+            menuPagos()
         elif(op==6):
             menuProducto()
         elif(op==0):

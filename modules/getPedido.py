@@ -1,10 +1,15 @@
-import storage.pedido as pe
-from datetime import datetime
+import requests
+import os
 from tabulate import tabulate
+from datetime import datetime
+def getAllDataPed():
+    pet=requests.get("http://192.168.20.37:5510")
+    data=pet.json()
+    return data
 def getEstadoPedido(): 
     estadoPedido=[]
     estadoPedidoVistos=set()
-    for val in pe.pedido:
+    for val in getAllDataPed():
         estadoDePedidos=val.get("estado")
         if estadoDePedidos not in estadoPedidoVistos:
             estadoPedido.append({
@@ -14,7 +19,7 @@ def getEstadoPedido():
     return estadoPedido
 def getAllPedidosEntregadosDespuesDeTiempo():
     pedidosEntregados=[]
-    for val in pe.pedido:
+    for val in getAllDataPed():
         if(val.get("estado")=="Entregado") and (val.get("fecha_entrega")==None):
             val["fecha_entrega"]=val.get("fecha_esperada")
         if(val.get("estado")=="Entregado"):
@@ -33,7 +38,7 @@ def getAllPedidosEntregadosDespuesDeTiempo():
     return pedidosEntregados
 def getAllPedidosRechazados():
     pedidosRechazados=[]
-    for val in pe.pedido:
+    for val in getAllDataPed():
         if(val.get("fecha_pedido")>=("2009-01-01") and (val.get("fecha_pedido")<=("2009-12-31")) and (val.get("estado")==("Rechazado"))):
             pedidosRechazados.append({
                 "Codigo del pedido":val.get("codigo_pedido"),
@@ -47,7 +52,7 @@ def getAllPedidosRechazados():
     return pedidosRechazados
 def getAllPedidosEntregadoAntesDeTiempo():
     pedidosAntes=[]
-    for val in pe.pedido:
+    for val in getAllDataPed():
         if(val.get("estado")=="Entregado") and (val.get("fecha_entrega")==None):
             val["fecha_entrega"]=val.get("fecha_esperada")
         if(val.get("estado")=="Entregado"):
@@ -66,7 +71,7 @@ def getAllPedidosEntregadoAntesDeTiempo():
     return pedidosAntes
 def getAllPedidosEntEnEnero():
     pedidosEnero=[]
-    for val in pe.pedido:
+    for val in getAllDataPed():
         fecha=val.get("fecha_entrega")
         if fecha:
             date_1="/".join(val.get("fecha_entrega").split("-")[::-1])

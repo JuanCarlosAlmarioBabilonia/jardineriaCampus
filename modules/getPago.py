@@ -1,9 +1,15 @@
-import storage.pago as pa
+#import storage.pago as pa
+import requests
+import os
 from tabulate import tabulate
+def getAllDataPa():
+    pet=requests.get("http://192.168.20.37:5508")
+    data=pet.json()
+    return data
 def getCodigoClientePago(): 
     codigoCliente=[]
     codigosVistos=set()
-    for val in pa.pago:
+    for val in getAllDataPa():
         if (val.get("fecha_pago")>("2008-01-01") and val.get("fecha_pago")<("2008-12-31")):
             codigoClientes=val.get("codigo_cliente")
             if codigoClientes not in codigosVistos:
@@ -16,7 +22,7 @@ def getCodigoClientePago():
     return codigoCliente
 def getAllPagosPaypal():
     pagosPaypal=[]
-    for val in pa.pago:
+    for val in getAllDataPa():
         if(val.get("fecha_pago")>=("2008-01-01") and (val.get("fecha_pago")<=("2008-12-31")) and val.get("forma_pago")==("PayPal")):
             pagosPaypal.append({
                 "Codigo del cliente":val.get("codigo_cliente"),
@@ -30,7 +36,7 @@ def getAllPagosPaypal():
 def getAllFormasPago(): 
     formasPago=[]
     formasPagoVistas=set()
-    for val in pa.pago:
+    for val in getAllDataPa():
         formaDePago=val.get("forma_pago")
         if formaDePago not in formasPagoVistas:
             formasPago.append({

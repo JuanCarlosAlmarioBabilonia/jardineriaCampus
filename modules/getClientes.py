@@ -1,26 +1,39 @@
-import storage.cliente as cli
-import storage.empleado as em
-import storage.pago as pa
+#import storage.cliente as cli
+#import storage.empleado as em
+#import storage.pago as pa
+import os
+import requests
 from tabulate import tabulate
+def getAllDataCli():
+    pet=requests.get("http://192.168.20.37:5506")
+    data=pet.json()
+    return data
+def getAllDataEmp():
+    pet=requests.get("http://192.168.20.37:5507")
+    data=pet.json()
+    return data
+def getAllDataPa():
+    pet=requests.get("http://192.168.20.37:5508")
+    data=pet.json()
+    return data
 def getAllClientesName():
-    clienteName = list()
-    for val in cli.cliente:
-        codigoName = dict({
+    clienteName = []
+    for val in getAllDataCli():
+        clienteName.append ({
         "Codigo": val.get("codigo_cliente"),
         "Nombre del Cliente": val.get("nombre_cliente")
         })
-        clienteName.append(codigoName)
     return clienteName
 def getOneClientCodigo(codigo):
-    for val in cli.cliente:
+    for val in getAllDataCli():
         if(val.get("codigo_cliente") == codigo):
             return[{
         "Codigo del Cliente": val.get("codigo_cliente"),
         "Nombre del Cliente": val.get("nombre_cliente")   
             }]
 def getAllClientCreditoCiudad(limiteCredit, ciudad):
-    clienteCredic = list()
-    for val in cli.cliente:
+    clienteCredic = []
+    for val in getAllDataCli():
         if(val.get("limite_credito") >= limiteCredit and val.get("ciudad") == ciudad):
             clienteCredic.append({
                 "Codigo":val.get("codigo_cliente"),
@@ -33,11 +46,10 @@ def getAllClientCreditoCiudad(limiteCredit, ciudad):
                 "Codigo del Asesor":val.get("codigo_empleado_rep_ventas"),
                 "Credito":val.get("limite_credito")
             })
-
     return clienteCredic
 def getAllClientPaisRegionCiudad(pais, region = None, ciudad = None):
-    clientZone = list()
-    for val in cli.cliente:
+    clientZone = []
+    for val in getAllDataCli():
         if(
             val.get("pais")== pais or 
             (val.get("region") == region or val.get("region") == None) or
@@ -54,20 +66,19 @@ def getAllClientPaisRegionCiudad(pais, region = None, ciudad = None):
             })
     return clientZone
 def getAllClientCodigoPostal():
-    clientCodigoPostal= list()
-    for val in cli.cliente:
-        codigoPostal=dict({
+    clientCodigoPostal= []
+    for val in getAllDataCli():
+        clientCodigoPostal.append({
         "Codigo del cliente": val.get("codigo_cliente"),
         "Nombre del cliente": val.get("nombre_cliente"),
         "Nombre del contacto":val.get("nombre_contacto"),
         "Apellido del contacto":val.get("apellido_contacto"),
         "Codigo postal": val.get("codigo_postal")
         })
-        clientCodigoPostal.append(codigoPostal)
     return(clientCodigoPostal)
 def getAllClientCiudad(ciudad):
-    clientCity = list()
-    for val in cli.cliente:
+    clientCity = []
+    for val in getAllDataCli():
         if(
         (val.get("ciudad") == ciudad)
         ):
@@ -80,20 +91,19 @@ def getAllClientCiudad(ciudad):
             })
     return clientCity
 def getAllClientDireccion():
-    clientDireccion=list()
-    for val in cli.cliente:
-        direccion=dict({
+    clientDireccion=[]
+    for val in getAllDataCli():
+        clientDireccion.append({
         "Codigo del cliente": val.get("codigo_cliente"),
         "Nombre del cliente": val.get("nombre_cliente"),
         "Nombre del contacto":val.get("nombre_contacto"),
         "Apellido del contacto":val.get("apellido_contacto"),
         "Direccion principal": val.get("linea_direccion1")
         })
-        clientDireccion.append(direccion)
     return(clientDireccion)
 def getAllClientCreditEntre():
-    clientCredit=list()
-    for val in cli.cliente:
+    clientCredit=[]
+    for val in getAllDataCli():
         if(val.get("limite_credito")>=5000 and val.get("limite_credito")<=10000):
             clientCredit.append({
                 "Codigo del cliente":val.get("codigo_cliente"),
@@ -104,20 +114,19 @@ def getAllClientCreditEntre():
             })
     return clientCredit
 def getAllClientTelefono():
-    clientTelefono= list()
-    for val in cli.cliente:
-        telefono=dict({
+    clientTelefono= []
+    for val in getAllDataCli():
+        clientTelefono.append({
         "Codigo del cliente":val.get("codigo_cliente"),
         "Nombre del cliente":val.get("nombre_cliente"),
         "Nombre del contacto":val.get("nombre_contacto"),
         "Apellido del contacto":val.get("apellido_contacto"),
         "Telefono": val.get("telefono")
         })
-        clientTelefono.append(telefono)
     return(clientTelefono)
 def getAllNombreClienteEspañol():
     clienteEspañol=[]
-    for val in cli.cliente:
+    for val in getAllDataCli():
         if(val.get("pais")=="Spain"):
             clienteEspañol.append(
                 {
@@ -131,7 +140,7 @@ def getAllNombreClienteEspañol():
     return clienteEspañol
 def getAllClienteCiudadRepVentas():
     clienteMadrid=[]
-    for val in cli.cliente:
+    for val in getAllDataCli():
         if((val.get("ciudad")=="Madrid") and (val.get("codigo_empleado_rep_ventas")== 11 or (val.get("codigo_empleado_rep_ventas")== 30))):
             clienteMadrid.append({
         "Codigo del cliente":val.get("codigo_cliente"),
@@ -144,8 +153,8 @@ def getAllClienteCiudadRepVentas():
     return clienteMadrid
 def getAllClientesReps():
     clientesRep=[]
-    for x in cli.cliente:
-        for y in em.empleado:
+    for x in getAllDataCli():
+        for y in getAllDataEmp():
             if x.get("codigo_empleado_rep_ventas")==y.get("codigo_empleado"):
                 clientesRep.append({
                     "Nombre del cliente": x.get("nombre_cliente"),
@@ -155,9 +164,9 @@ def getAllClientesReps():
     return clientesRep
 def getAllClientesPagos():
     clientesPago=[]
-    for x in cli.cliente:
-        for y in em.empleado:
-            for z in pa.pago:
+    for x in getAllDataCli():
+        for y in getAllDataEmp():
+            for z in getAllDataPa():
                 if x.get("codigo_cliente")==z.get("codigo_cliente") and x.get("codigo_empleado_rep_ventas")==y.get("codigo_empleado") :
                     clientesPago.append({
                         "Codigo del cliente":x.get("codigo_cliente"),
@@ -209,6 +218,7 @@ REPORTES DE LOS CLIENTES
         op=int(input("Seleccione una de las opciones: "))
         if(op==1):
             print(tabulate(getAllClientesName(),headers="keys",tablefmt="grid"))
+            print(...)
         elif(op==2):
             try:
                codigoCliente=int(input("Ingrese el codigo del cliente: "))

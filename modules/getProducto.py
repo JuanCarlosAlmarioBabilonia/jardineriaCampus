@@ -2,7 +2,7 @@ import requests
 import os
 from tabulate import tabulate
 def getAllData():
-    pet=requests.get("http://172.16.103.39:5503")
+    pet=requests.get("http://192.168.20.37:5503")
     data=pet.json()
     return data
 def getAllProductosOrnamentales(gama,stock):

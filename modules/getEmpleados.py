@@ -1,8 +1,14 @@
-import storage.empleado as em
+# import storage.empleado as em
+import os
+import requests
 from tabulate import tabulate
+def getAllDataEmp():
+    pet=requests.get("http://192.168.20.37:5507")
+    data=pet.json()
+    return data
 def getAllNombreApellidoEmailJefe(codigo):
     nombreApellidoEmp=[]
-    for val in em.empleado:
+    for val in getAllDataEmp():
         if(val.get("codigo_jefe")==codigo):
             nombreApellidoEmp.append({
                 "Codigo del jefe":val.get("codigo_jefe"),
@@ -14,7 +20,7 @@ def getAllNombreApellidoEmailJefe(codigo):
     return nombreApellidoEmp
 def getAllNombreApellidoEmailJefe2():
     nombreApellidoEmail2=[]
-    for val in em.empleado:
+    for val in getAllDataEmp():
         if(val.get("codigo_jefe")==None):
             nombreApellidoEmail2.append({
             "Nombre":val.get("nombre"),
@@ -25,7 +31,7 @@ def getAllNombreApellidoEmailJefe2():
     return nombreApellidoEmail2
 def getAllNombreApellidoPuestoEmNoRep():
     nombreApellidoPuesto=[]
-    for val in em.empleado:
+    for val in getAllDataEmp():
         if(val.get("puesto")!=("Representante Ventas")):
             nombreApellidoPuesto.append({
             "Nombre":val.get("nombre"),
@@ -35,7 +41,7 @@ def getAllNombreApellidoPuestoEmNoRep():
     return nombreApellidoPuesto
 def getAllExtensionEmailEmp():
     exEm=[]
-    for val in em.empleado:
+    for val in getAllDataEmp():
         exEm.append({
             "Nombre":val.get("nombre"),
             "Apellidos":f"{val.get('apellido1')} {val.get('apellido2')}",
@@ -58,6 +64,7 @@ REPORTES DE LOS EMPLEADOS
         try:
             codigo=int(input("Ingrese el codigo: "))   
             print(tabulate(getAllNombreApellidoEmailJefe(codigo),headers="keys",tablefmt="grid"))
+            input("Presiona cualquier tecla para continuar.....")
         except KeyboardInterrupt:
            return menu()
       elif(op==2):

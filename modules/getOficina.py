@@ -1,8 +1,13 @@
-import storage.oficina as of
+import requests
+import os
 from tabulate import tabulate
+def getAllDataOf():
+    pet=requests.get("http://192.168.20.37:5509")
+    data=pet.json()
+    return data
 def getAllCodigoCiudad():
     codigoCiudad=[]
-    for val in of.oficina:
+    for val in getAllDataOf():
         codigoCiudad.append({
             "Codigo de la oficina":val.get("codigo_oficina"),
             "Ciudad":val.get("ciudad")
@@ -10,7 +15,7 @@ def getAllCodigoCiudad():
     return codigoCiudad
 def getAllCiudadTelefono(pais):
     ciudadTelefono=[]
-    for val in of.oficina:
+    for val in getAllDataOf():
         if (val.get("pais")==pais):
             ciudadTelefono.append({
                 "Codigo de la oficina":val.get("codigo_oficina"),
@@ -21,7 +26,7 @@ def getAllCiudadTelefono(pais):
     return ciudadTelefono
 def getAllDirecciones():
     direccion=[]
-    for val in of.oficina:
+    for val in getAllDataOf():
         direccion.append({
                 "Codigo de la oficina":val.get("codigo_oficina"),
                 "Ciudad":val.get("ciudad"),
