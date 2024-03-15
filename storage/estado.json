@@ -1,0 +1,11 @@
+[
+    {
+        "estado": "Entregado"
+    },
+    {
+        "estado": "Pendiente"
+    },
+    {
+        "estado": "Rechazado"
+    }
+]

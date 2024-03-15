@@ -19,7 +19,7 @@ def postCliente():
         "codigo_empleado_rep_ventas": int(input("Ingrese el codigo de su Rep. de ventas: ")),
         "limite_credito": int(input("Ingrese su limite de credito: "))
     }
-    pet=requests.post("http://192.168.20.37:5506", data=json.dumps(cliente))
+    pet=requests.post("http://172.16.100.133:5506", data=json.dumps(cliente))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]

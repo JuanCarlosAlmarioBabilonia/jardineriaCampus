@@ -5,15 +5,15 @@ import os
 import requests
 from tabulate import tabulate
 def getAllDataCli():
-    pet=requests.get("http://192.168.20.37:5506")
+    pet=requests.get("http://172.16.100.133:5506")
     data=pet.json()
     return data
 def getAllDataEmp():
-    pet=requests.get("http://192.168.20.37:5507")
+    pet=requests.get("http://172.16.100.133:5507")
     data=pet.json()
     return data
 def getAllDataPa():
-    pet=requests.get("http://192.168.20.37:5508")
+    pet=requests.get("http://172.16.100.133:5508")
     data=pet.json()
     return data
 def getAllClientesName():

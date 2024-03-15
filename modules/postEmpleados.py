@@ -2,6 +2,7 @@ import json
 import requests
 from tabulate import tabulate
 import os
+import modules.getPuestos as puesto
 def postEmpleados():
     empleado={
         "codigo_empleado": int(input("Ingrese su codigo del empleado: ")),
@@ -12,9 +13,9 @@ def postEmpleados():
         "email": input("Ingrese su email: "),
         "codigo_oficina": input("Ingrese su codigo de oficina: "),
         "codigo_jefe": int(input("Ingrese su codigo de jefe: ")),
-        "puesto": input("Ingrese su puesto: ")
+        "puesto": puesto.getAllTipoPu()[int(input("Selecione la gama:\n"+"".join([f"\t{i}. {val}\n" for i, val in enumerate(puesto.getAllTipoPu())])))]
     }
-    pet=requests.post("http://192.168.20.37:5507", data=json.dumps(empleado))
+    pet=requests.post("http://172.16.100.133:5507", data=json.dumps(empleado))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]

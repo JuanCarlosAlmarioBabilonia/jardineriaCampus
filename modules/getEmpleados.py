@@ -3,7 +3,7 @@ import os
 import requests
 from tabulate import tabulate
 def getAllDataEmp():
-    pet=requests.get("http://192.168.20.37:5507")
+    pet=requests.get("http://172.16.100.133:5507")
     data=pet.json()
     return data
 def getAllNombreApellidoEmailJefe(codigo):

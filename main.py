@@ -120,18 +120,22 @@ MENU PRINCIPAL
 5. Pagos
 6. Productos
  """)
-        op=int(input("Seleccione una de las opciones: "))
-        if(op==1):
-            menuCliente()
-        elif(op==2):
-            menuOficina()
-        elif(op==3):
-            menuEmpleado()
-        elif(op==4):
-            menuPedidos()
-        elif(op==5):
-            menuPagos()
-        elif(op==6):
-            menuProducto()
-        elif(op==0):
-            break
+        try:
+            op=int(input("Seleccione una de las opciones: "))
+            if(op==1):
+                menuCliente()
+            elif(op==2):
+                menuOficina()
+            elif(op==3):
+                menuEmpleado()
+            elif(op==4):
+                menuPedidos()
+            elif(op==5):
+                menuPagos()
+            elif(op==6):
+                menuProducto()
+            elif(op==0):
+                break
+        except ValueError:
+            print("Error generado")
+        

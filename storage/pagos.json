@@ -1,0 +1,11 @@
+[
+    {
+        "forma_pago": "PayPal"
+    },
+    {
+        "forma_pago": "Transferencia"
+    },
+    {
+        "forma_pago": "Cheque"
+    }
+]
