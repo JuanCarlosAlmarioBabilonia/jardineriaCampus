@@ -5,6 +5,10 @@ def getAllDataOf():
     pet=requests.get("http://192.168.20.37:5509")
     data=pet.json()
     return data
+def getOficinaCodigo(codigo):
+    for val in getAllDataOf():
+        if(val.get("codigo_oficina") == codigo):
+            return [val]
 def getAllCodigoCiudad():
     codigoCiudad=[]
     for val in getAllDataOf():

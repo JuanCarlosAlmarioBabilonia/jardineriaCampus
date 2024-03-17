@@ -375,5 +375,70 @@
         "codigo_jefe": 45,
         "puesto": "Secretaria",
         "id": 34
+    },
+    {
+        "codigo_empleado": 15,
+        "nombre": "Juan",
+        "apellido1": "Vega",
+        "apellido2": "Paniagua",
+        "email": "juanvega@jardineria.es",
+        "id": 35
+    },
+    {
+        "codigo_empleado": 14,
+        "nombre": "Sofia",
+        "apellido1": "Rivera",
+        "apellido2": "Arizmendi",
+        "email": "sofirivera@jardineria.es",
+        "id": 36
+    },
+    {
+        "codigo_empleado": 15,
+        "nombre": "Salomon",
+        "apellido1": "Jaimes",
+        "apellido2": "Salazar",
+        "email": "salojaimes@jardineria.es",
+        "codigo_oficina": "LON-UK",
+        "puesto": "Representante Ventas",
+        "id": 37
+    },
+    {
+        "codigo_empleado": 27,
+        "nombre": "Aura Patricia",
+        "apellido1": "Hernandez",
+        "id": 38
+    },
+    {
+        "codigo_empleado": 14,
+        "nombre": "Ana Cristina",
+        "apellido1": "Leal",
+        "apellido2": "Mondragon",
+        "email": "analeal@jardineria.es",
+        "codigo_oficina": "SFC-USA",
+        "codigo_jefe": 12,
+        "puesto": "Secretaria",
+        "id": 39
+    },
+    {
+        "codigo_empleado": 15,
+        "nombre": "Saul",
+        "apellido1": "Rivera",
+        "apellido2": "Aranda",
+        "email": "saul@jardineria.es",
+        "codigo_oficina": "PAR-FR",
+        "codigo_jefe": 14,
+        "puesto": "Director Oficina",
+        "id": 40
+    },
+    {
+        "codigo_empleado": 15,
+        "nombre": "Juan",
+        "apellido1": "Tarazona",
+        "apellido2": "Teyes",
+        "email": "juant@jardineria.es",
+        "codigo_oficina": "MAD-ES",
+        "codigo_jefe": 15,
+        "puesto": "Representante Ventas",
+        "id": 41
     }
 ]

@@ -11,10 +11,10 @@ def postCliente():
         try:
             # corregir porque no me deja hacer el filtro para que solo puedan ingresarse codigos no existentes
             if(not cliente.get("codigo_cliente")):
-                codigo=input("Ingrese el codigo del cliente: ")
-                if(re.match(r'^[0-9]{2}$',codigo)is not None):
-                    codigo= int(codigo)
-                    cliente["codigo_producto"]=codigo
+                codigo_cliente=input("Ingrese el codigo del cliente: ")
+                if(re.match(r'^[0-9]{2}$',codigo_cliente)is not None):
+                    codigo_cliente= int(codigo_cliente)
+                    cliente["codigo_cliente"]=codigo_cliente
                 else:
                     raise Exception("El codigo del cliente no cumple con el estandar establecido")
                 
@@ -57,14 +57,14 @@ def postCliente():
 
             if(not cliente.get("linea_direccion1")):
                 linea_direccion1=input("Ingrese su direccion principal: ")
-                if(re.match(r'^([A-Za-z][a-z]*\s*)+$',linea_direccion1)is not None):
+                if(re.match(r'^[0-9A-Za-z\s]+$',linea_direccion1)is not None):
                     cliente["linea_direccion1"]=linea_direccion1
                 else:
                     raise Exception("Su linea de direccion principal no cumple con el estandar establecido")   
                 
             if(not cliente.get("linea_direccion2")):
                 linea_direccion2=input("Ingrese su direccion principal: ")
-                if(re.match(r'^([A-Za-z][a-z]*\s*)+$',linea_direccion2)is not None):
+                if(re.match(r'^[0-9A-Za-z\s]+$',linea_direccion2)is not None):
                     cliente["linea_direccion2"]=linea_direccion2
             
             if(not cliente.get("ciudad")):
@@ -73,20 +73,7 @@ def postCliente():
                     cliente["ciudad"]=ciudad
                 else:
                     raise Exception("Su ciudad no cumple con el estandar establecido")  
-                
-            if(not cliente.get("region")):
-                region=input("Ingrese su region: ")
-                if(re.match(r'^([A-Za-z][a-z]*\s*)+$',region)is not None):
-                    cliente["region"]=region
-                else:
-                    raise Exception("Su region no cumple con el estandar establecido")  
-            
-            if(not cliente.get("pais")):
-                pais=input("Ingrese su pais: ")
-                if(re.match(r'^([A-Za-z][a-z]*\s*)+$',pais)is not None):
-                    cliente["pais"]=pais
-                else:
-                    raise Exception("Su pais no cumple con el estandar establecido")  
+                  
             
             if(not cliente.get("codigo_postal")):
                 codigo_postal=input("Ingrese su codigo postal: ")
@@ -104,12 +91,11 @@ def postCliente():
                     cliente["codigo_empleado_rep_ventas"]=codigo_empleado_rep_ventas
                 else:
                     raise Exception("El codigo de su Representante no cumple con el estandar establecido")  
-                
-            
+                           
             if(not cliente.get("limite_credito")):
                 limite_credito=input("Ingrese su limite de credito: ")
                 if(re.match(r'^[0-9]{4,5}$',limite_credito)is not None):
-                    limite_credito= int(limite_credito)
+                    limite_credito= float(limite_credito)
                     cliente["limite_credito"]=limite_credito
                     break
                 else:

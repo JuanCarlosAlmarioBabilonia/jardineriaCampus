@@ -2,17 +2,68 @@ import json
 import requests
 from tabulate import tabulate
 import os
-import modules.getEstados as es
+import re
+import modules.getEstados as gE
 def postPedido():
-    pedido={
-        "codigo_pedido": int(input("Ingrese el codigo del pedido: ")),
-        "fecha_pedido": input("Ingrese la fecha del pedido (año-mes-dia): "),
-        "fecha_esperada": input("Ingrese la fecha esperada del pedido (año-mes-dia): "),
-        "fecha_entrega": input("Ingrese la fecha de entrega del pedido(año-mes-dia): "),
-        "estado": es.getAllName()[int(input("Selecione el estado:\n"+"".join([f"\t{i}. {val}\n" for i, val in enumerate(es.getAllName())])))],
-        "comentario": input("Ingrese un comentario: "),
-        "codigo_cliente": int(input("Ingrese el codigo del cliente: "))
-    }
+    pedido=dict()
+    while True:
+        try:
+            # corregir porque no me deja hacer el filtro para que solo puedan ingresarse codigos no existentes
+            if(not pedido.get("codigo_pedido")):
+                codigo_pedido=input("Ingrese el codigo del pedido: ")
+                if(re.match(r'^[0-9]{2}$',codigo_pedido)is not None):
+                    codigo_pedido= int(codigo_pedido)
+                    pedido["codigo_pedido"]=codigo_pedido
+                else:
+                    raise Exception("El codigo del pedido no cumple con el estandar establecido")
+            
+            if(not pedido.get("fecha_pedido")): 
+                fecha_pedido=input("Ingrese la fecha del pedido: ")
+            if(re.match(r'^\d{4}-\d{2}-\d{2}$',fecha_pedido)is not None):
+                    pedido["fecha_pedido"]=fecha_pedido
+            else:
+                raise Exception("La fecha del pedido no cumple con el estandar establecido")
+            
+            if(not pedido.get("fecha_esperada")): 
+                fecha_esperada=input("Ingrese la fecha esperada de entrega: ")
+            if(re.match(r'^\d{4}-\d{2}-\d{2}$',fecha_esperada)is not None):
+                    pedido["fecha_esperada"]=fecha_esperada
+            else:
+                raise Exception("La fecha esperada de entrega no cumple con el estandar establecido")
+            
+            if(not pedido.get("fecha_entrega")): 
+                fecha_entrega=input("Ingrese la fecha de entrega: ")
+            if(re.match(r'^\d{4}-\d{2}-\d{2}$',fecha_entrega)is not None):
+                    pedido["fecha_entrega"]=fecha_entrega
+            else:
+                raise Exception("La fecha de entrega no cumple con el estandar establecido")
+            
+            if not pedido.get("estado"):
+                estado= input("Seleccione el estado del producto:\n" + "".join([f"\t{i}. {val}\n" for i, val in enumerate(gE.getAllName())]))
+            if re.match(r'^[0-4]$', estado) is not None:  
+                estado = int(estado)
+                estado = gE.getAllName()[estado]
+                pedido["estado"] = estado
+            else:
+                raise Exception("El estado del producto no cumple con el estándar establecido")
+            
+            if(not pedido.get("comentario")):
+                comentario=input("Ingrese un comentario: ")
+                if(re.match(r'^([A-Za-z][a-z]*\s*)+$',comentario)is not None):
+                    pedido["comentario"]=comentario
+                else:
+                    raise Exception("El comentario del pedido no cumple con el estandar establecido") 
+
+            if(not pedido.get("codigo_cliente")):
+                codigo_cliente=input("Ingrese el codigo del cliente: ")
+                if(re.match(r'^[0-9]{2}$',codigo_cliente)is not None):
+                    codigo_cliente= int(codigo_cliente)
+                    pedido["codigo_cliente"]=codigo_cliente
+                    break
+                else:
+                    raise Exception("El codigo del cliente no cumple con el estandar establecido")
+        except Exception as error:        
+            print(error)
     pet=requests.post("http://192.168.20.37:5510", data=json.dumps(pedido))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
