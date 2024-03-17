@@ -13,7 +13,7 @@ def postPedido():
         "comentario": input("Ingrese un comentario: "),
         "codigo_cliente": int(input("Ingrese el codigo del cliente: "))
     }
-    pet=requests.post("http://172.16.100.133:5510", data=json.dumps(pedido))
+    pet=requests.post("http://192.168.20.37:5510", data=json.dumps(pedido))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]

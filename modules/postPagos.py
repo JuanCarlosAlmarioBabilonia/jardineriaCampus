@@ -11,7 +11,7 @@ def postPagos():
         "fecha_pago":input("Ingrese su fecha de pago (año-mes-dia): "),
         "total": int(input("Ingrese el total: "))
     }
-    pet=requests.post("http://172.16.100.133:5508", data=json.dumps(pagos))
+    pet=requests.post("http://192.168.20.37:5508", data=json.dumps(pagos))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]

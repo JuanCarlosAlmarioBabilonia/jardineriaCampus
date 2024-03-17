@@ -13,7 +13,7 @@ def postOficina():
         "linea_direccion1": input("Ingrese su direccion principal de oficina: "),
         "linea_direccion2": input("Ingrese su direccion secundaria de oficina: ")
     }
-    pet=requests.post("http://172.16.100.133:5509", data=json.dumps(oficina))
+    pet=requests.post("http://192.168.20.37:5509", data=json.dumps(oficina))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]

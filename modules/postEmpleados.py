@@ -15,7 +15,7 @@ def postEmpleados():
         "codigo_jefe": int(input("Ingrese su codigo de jefe: ")),
         "puesto": puesto.getAllTipoPu()[int(input("Selecione la gama:\n"+"".join([f"\t{i}. {val}\n" for i, val in enumerate(puesto.getAllTipoPu())])))]
     }
-    pet=requests.post("http://172.16.100.133:5507", data=json.dumps(empleado))
+    pet=requests.post("http://192.168.20.37:5507", data=json.dumps(empleado))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]

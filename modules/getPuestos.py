@@ -1,6 +1,6 @@
 import requests
 def getAllPuestos():
-    pet=requests.get("http://172.16.100.133:5513")
+    pet=requests.get("http://192.168.20.37:5513")
     data=pet.json()
     return data
 def getAllTipoPu():
