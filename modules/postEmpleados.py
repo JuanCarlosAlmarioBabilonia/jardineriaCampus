@@ -3,6 +3,7 @@ import requests
 from tabulate import tabulate
 import os
 import modules.getPuestos as gPu
+import modules.getEmpleados as gEm
 import re
 import modules.getCodeOficina as gCof
 def postEmpleados():
@@ -12,9 +13,14 @@ def postEmpleados():
             # corregir porque no me deja hacer el filtro para que solo puedan ingresarse codigos no existentes
             if(not empleado.get("codigo_empleado")):
                 codigo_empleado=input("Ingrese el codigo del empleado: ")
-                if(re.match(r'^[0-9]{2}$',codigo_empleado)is not None):
+                if(re.match(r'^[0-9]+$',codigo_empleado)is not None):
                     codigo_empleado= int(codigo_empleado)
-                    empleado["codigo_empleado"]=codigo_empleado
+                    data=gEm.getAllCodeEmp(codigo_empleado)
+                    if (data):
+                        print(tabulate(data,tablefmt="grid"))
+                        raise Exception("El codigo ya pertenece a un cliente")
+                    else:    
+                        empleado["codigo_empleado"]=codigo_empleado
                 else:
                     raise Exception("El codigo del cliente no cumple con el estandar establecido")
                 
@@ -75,7 +81,7 @@ def postEmpleados():
                  
         except Exception as error:
             print(error)
-    pet=requests.post("http://192.168.20.37:5507", data=json.dumps(empleado))
+    pet=requests.post("http://172.16.100.133:5507", data=json.dumps(empleado))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]

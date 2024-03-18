@@ -4,19 +4,23 @@ from tabulate import tabulate
 import os
 import re
 import modules.getEstados as gE
+import modules.getPedido as gPed
 def postPedido():
     pedido=dict()
     while True:
         try:
-            # corregir porque no me deja hacer el filtro para que solo puedan ingresarse codigos no existentes
             if(not pedido.get("codigo_pedido")):
                 codigo_pedido=input("Ingrese el codigo del pedido: ")
-                if(re.match(r'^[0-9]{2}$',codigo_pedido)is not None):
+                if(re.match(r'^[0-9]+$',codigo_pedido)is not None):
                     codigo_pedido= int(codigo_pedido)
-                    pedido["codigo_pedido"]=codigo_pedido
+                    data=gPed.getPedidoCode(codigo_pedido)
+                    if(data):
+                        print(tabulate(data,tablefmt="grid"))
+                        raise Exception("El codigo ya pertenece a un pedido")
+                    else:
+                        pedido["codigo_pedido"]=codigo_pedido
                 else:
-                    raise Exception("El codigo del pedido no cumple con el estandar establecido")
-            
+                    raise Exception("El codigo del cliente no cumple con el estandar establecido")
             if(not pedido.get("fecha_pedido")): 
                 fecha_pedido=input("Ingrese la fecha del pedido: ")
             if(re.match(r'^\d{4}-\d{2}-\d{2}$',fecha_pedido)is not None):
@@ -64,7 +68,7 @@ def postPedido():
                     raise Exception("El codigo del cliente no cumple con el estandar establecido")
         except Exception as error:        
             print(error)
-    pet=requests.post("http://192.168.20.37:5510", data=json.dumps(pedido))
+    pet=requests.post("http://172.16.100.133:5510", data=json.dumps(pedido))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]

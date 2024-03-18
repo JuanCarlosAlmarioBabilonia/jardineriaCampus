@@ -4,17 +4,22 @@ from tabulate import tabulate
 import os
 import modules.getFormasPago as fPago
 import re
+import modules.getClientes as gC
 # import modules.getPago as Gpag
 def postPagos():
     pagos=dict()
     while True:
         try:
-            # corregir porque no me deja hacer el filtro para que solo puedan ingresarse codigos no existentes
             if(not pagos.get("codigo_cliente")):
                 codigo_cliente=input("Ingrese el codigo del cliente: ")
-                if(re.match(r'^[0-9]{2}$',codigo_cliente)is not None):
+                if(re.match(r'^[0-9]+$',codigo_cliente)is not None):
                     codigo_cliente= int(codigo_cliente)
-                    pagos["codigo_cliente"]=codigo_cliente
+                    data=gC.getClienteCodigo(codigo_cliente)
+                    if(data):
+                        print(tabulate(data,tablefmt="grid"))
+                        raise Exception("El codigo ya pertenece a un cliente")
+                    else:
+                        pagos["codigo_cliente"]=codigo_cliente
                 else:
                     raise Exception("El codigo del cliente no cumple con el estandar establecido")
         
@@ -52,7 +57,7 @@ def postPagos():
         
         except Exception as error:        
             print(error)
-    pet=requests.post("http://192.168.20.37:5508", data=json.dumps(pagos))
+    pet=requests.post("http://172.16.100.133:5508", data=json.dumps(pagos))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]

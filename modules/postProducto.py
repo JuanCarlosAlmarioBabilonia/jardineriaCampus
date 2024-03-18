@@ -85,21 +85,45 @@ def postProducto():
                 
         except Exception as error:
             print(error)
-    pet=requests.post("http://192.168.20.37:5503", data=json.dumps(producto))
+    pet=requests.post("http://172.16.100.133:5503", data=json.dumps(producto))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]
+def deleteProducto(id):
+    data=gP.getProductCodigo(id)
+    if(len(data)):
+        pet=requests.delete(f"http://172.16.100.133:5503/producto/{id}")
+        if(pet.status_code==204):
+            data.append({"Mensaje": "El producto ha sido eliminado satisfactoriamente"})
+            return{
+                "Body":data,
+                "Status":pet.status_code,
+            }
+    else:
+        return{
+            "Body":[{
+                "Mensaje":"El producto no ha sido encontrado",
+                "ID":id
+            }],
+            "Status":400
+        }
 def menu():
     while True:
         os.system("clear")
         print("""
- ADMINISTRACION DE PRODUCTOS
- 1.Guardar un producto
- 0.Atras
+ADMINISTRACION DE PRODUCTOS
+0.Atras
+1.Guardar un producto
+2.Eliminar un producto
                """)
         op = int(input("Selecione una de las opciones: "))
+        # if(re.match(r'[0-2]$', op)is not None):
+        #     op=int(op)
         if(op== 1):
             print(tabulate(postProducto(),tablefmt="grid"))
-            input("Precione una tecla para continuar.....")
+            input("Presione una tecla para continuar.....")
+        elif(op==2):
+            idProducto=int(input("Ingrese el id del producto que desea eliminar:"))
+            print(tabulate(deleteProducto(idProducto)["Body"],tablefmt="grid"))
         elif(op== 0):
             break

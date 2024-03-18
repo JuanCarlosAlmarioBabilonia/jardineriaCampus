@@ -3,13 +3,12 @@ import os
 from tabulate import tabulate
 import modules.getGamas as gG
 def getAllData():
-    pet=requests.get("http://192.168.20.37:5503")
+    pet=requests.get("http://172.16.100.133:5503/producto")
     data=pet.json()
     return data
 def getProductCodigo(codigo):
-    for val in getAllData():
-        if(val.get("codigo_producto") == codigo):
-            return [val]
+    pet=requests.get(f"http://172.16.100.133:5503/producto/${codigo}")
+    return [pet.json()] if pet.ok else[]
 def getAllProductosOrnamentales(gama,stock):
     condiciones=[]
     for val in getAllData():

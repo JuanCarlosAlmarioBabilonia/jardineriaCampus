@@ -12,6 +12,7 @@ import modules.postOficina as postOficina
 import modules.postPedido as postPedido
 import os
 import re
+import json
 
 def menuProducto():
     while True:
@@ -124,6 +125,16 @@ MENU DE PEDIDOS
         elif(op==0):
             break  
 if(__name__ == "__main__"):
+    # with open("storage/producto.json", "r") as f:
+    #     fichero = f.read()
+    #     data = json.loads(fichero)
+    # for i, val in enumerate(data):
+    #     data[i]["id"] = (i+1)
+    #     print(data)
+    #     data = json.dumps(data, indent=4).encode("utf-8")
+    #  with open("storage/producto.json", "wb+") as f1:
+    #      f1.write(data)
+    #     f1.close()
     while True:
         os.system("clear")
         print("""
@@ -154,4 +165,3 @@ MENU PRINCIPAL
                break
         except ValueError:
             print("Error generado")
-        

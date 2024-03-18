@@ -9,12 +9,16 @@ def postCliente():
     cliente=dict()
     while True:
         try:
-            # corregir porque no me deja hacer el filtro para que solo puedan ingresarse codigos no existentes
             if(not cliente.get("codigo_cliente")):
                 codigo_cliente=input("Ingrese el codigo del cliente: ")
-                if(re.match(r'^[0-9]{2}$',codigo_cliente)is not None):
+                if(re.match(r'^[0-9]+$',codigo_cliente)is not None):
                     codigo_cliente= int(codigo_cliente)
-                    cliente["codigo_cliente"]=codigo_cliente
+                    data=gC.getClienteCodigo(codigo_cliente)
+                    if(data):
+                        print(tabulate(data,tablefmt="grid"))
+                        raise Exception("El codigo ya pertenece a un cliente")
+                    else:
+                        cliente["codigo_cliente"]=codigo_cliente
                 else:
                     raise Exception("El codigo del cliente no cumple con el estandar establecido")
                 
@@ -102,7 +106,7 @@ def postCliente():
                     raise Exception("Su limite de credito no cumple con el estandar establecido")  
         except Exception as error:
             print(error)
-    pet=requests.post("http://192.168.20.37:5506", data=json.dumps(cliente))
+    pet=requests.post("http://172.16.100.133:5506", data=json.dumps(cliente))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]

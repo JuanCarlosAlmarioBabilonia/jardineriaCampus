@@ -3,9 +3,13 @@ import os
 from tabulate import tabulate
 from datetime import datetime
 def getAllDataPed():
-    pet=requests.get("http://192.168.20.37:5510")
+    pet=requests.get("http://172.16.100.133:5510")
     data=pet.json()
     return data
+def getPedidoCode(codigo):
+    for val in getAllDataPed():
+        if(val.get("codigo_pedido") == codigo):
+            return [val]
 def getEstadoPedido(): 
     estadoPedido=[]
     estadoPedidoVistos=set()

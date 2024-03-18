@@ -2,7 +2,7 @@ import requests
 import os
 from tabulate import tabulate
 def getAllDataOf():
-    pet=requests.get("http://192.168.20.37:5509")
+    pet=requests.get("http://172.16.100.133:5509")
     data=pet.json()
     return data
 def getOficinaCodigo(codigo):
