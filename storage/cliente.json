@@ -13,7 +13,8 @@
         "pais": "USA",
         "codigo_postal": "24006",
         "codigo_empleado_rep_ventas": 19,
-        "limite_credito": 3000.0
+        "limite_credito": 3000.0,
+        "id": 1
     },
     {
         "codigo_cliente": 3,
@@ -29,7 +30,8 @@
         "pais": "USA",
         "codigo_postal": "24010",
         "codigo_empleado_rep_ventas": 19,
-        "limite_credito": 6000.0
+        "limite_credito": 6000.0,
+        "id": 2
     },
     {
         "codigo_cliente": 4,
@@ -45,7 +47,8 @@
         "pais": "USA",
         "codigo_postal": "85495",
         "codigo_empleado_rep_ventas": 22,
-        "limite_credito": 12000.0
+        "limite_credito": 12000.0,
+        "id": 3
     },
     {
         "codigo_cliente": 5,
@@ -61,7 +64,8 @@
         "pais": "USA",
         "codigo_postal": "696969",
         "codigo_empleado_rep_ventas": 22,
-        "limite_credito": 600000.0
+        "limite_credito": 600000.0,
+        "id": 4
     },
     {
         "codigo_cliente": 6,
@@ -77,7 +81,8 @@
         "pais": "Spain",
         "codigo_postal": "28945",
         "codigo_empleado_rep_ventas": 8,
-        "limite_credito": 154310.0
+        "limite_credito": 154310.0,
+        "id": 5
     },
     {
         "codigo_cliente": 7,
@@ -93,7 +98,8 @@
         "pais": "Spain",
         "codigo_postal": "28942",
         "codigo_empleado_rep_ventas": 11,
-        "limite_credito": 20000.0
+        "limite_credito": 20000.0,
+        "id": 6
     },
     {
         "codigo_cliente": 8,
@@ -109,7 +115,8 @@
         "pais": "Spain",
         "codigo_postal": "28930",
         "codigo_empleado_rep_ventas": 11,
-        "limite_credito": 40000.0
+        "limite_credito": 40000.0,
+        "id": 7
     },
     {
         "codigo_cliente": 9,
@@ -125,7 +132,8 @@
         "pais": "Spain",
         "codigo_postal": "28947",
         "codigo_empleado_rep_ventas": 11,
-        "limite_credito": 32000.0
+        "limite_credito": 32000.0,
+        "id": 8
     },
     {
         "codigo_cliente": 10,
@@ -141,7 +149,8 @@
         "pais": "Spain",
         "codigo_postal": "28946",
         "codigo_empleado_rep_ventas": 11,
-        "limite_credito": 50000.0
+        "limite_credito": 50000.0,
+        "id": 9
     },
     {
         "codigo_cliente": 11,
@@ -157,7 +166,8 @@
         "pais": "Spain",
         "codigo_postal": "28943",
         "codigo_empleado_rep_ventas": 11,
-        "limite_credito": 20000.0
+        "limite_credito": 20000.0,
+        "id": 10
     },
     {
         "codigo_cliente": 12,
@@ -173,7 +183,8 @@
         "pais": "Spain",
         "codigo_postal": "28945",
         "codigo_empleado_rep_ventas": 8,
-        "limite_credito": 154310.0
+        "limite_credito": 154310.0,
+        "id": 11
     },
     {
         "codigo_cliente": 13,
@@ -189,7 +200,8 @@
         "pais": "Spain",
         "codigo_postal": "28145",
         "codigo_empleado_rep_ventas": 8,
-        "limite_credito": 16481.0
+        "limite_credito": 16481.0,
+        "id": 12
     },
     {
         "codigo_cliente": 14,
@@ -205,7 +217,8 @@
         "pais": "Spain",
         "codigo_postal": "28003",
         "codigo_empleado_rep_ventas": 8,
-        "limite_credito": 321000.0
+        "limite_credito": 321000.0,
+        "id": 13
     },
     {
         "codigo_cliente": 15,
@@ -221,7 +234,8 @@
         "pais": "Spain",
         "codigo_postal": "28950",
         "codigo_empleado_rep_ventas": 30,
-        "limite_credito": 40000.0
+        "limite_credito": 40000.0,
+        "id": 14
     },
     {
         "codigo_cliente": 16,
@@ -237,7 +251,8 @@
         "pais": "Spain",
         "codigo_postal": "28945",
         "codigo_empleado_rep_ventas": 5,
-        "limite_credito": 1500.0
+        "limite_credito": 1500.0,
+        "id": 15
     },
     {
         "codigo_cliente": 17,
@@ -253,7 +268,8 @@
         "pais": "Spain",
         "codigo_postal": "24586",
         "codigo_empleado_rep_ventas": 5,
-        "limite_credito": 3500.0
+        "limite_credito": 3500.0,
+        "id": 16
     },
     {
         "codigo_cliente": 18,
@@ -269,7 +285,8 @@
         "pais": "Spain",
         "codigo_postal": "28011",
         "codigo_empleado_rep_ventas": 30,
-        "limite_credito": 5050.0
+        "limite_credito": 5050.0,
+        "id": 17
     },
     {
         "codigo_cliente": 19,
@@ -285,7 +302,8 @@
         "pais": "Spain",
         "codigo_postal": "38297",
         "codigo_empleado_rep_ventas": 12,
-        "limite_credito": 30000.0
+        "limite_credito": 30000.0,
+        "id": 18
     },
     {
         "codigo_cliente": 20,
@@ -301,7 +319,8 @@
         "pais": "Spain",
         "codigo_postal": "12320",
         "codigo_empleado_rep_ventas": 12,
-        "limite_credito": 20000.0
+        "limite_credito": 20000.0,
+        "id": 19
     },
     {
         "codigo_cliente": 21,
@@ -317,7 +336,8 @@
         "pais": "Spain",
         "codigo_postal": "35488",
         "codigo_empleado_rep_ventas": 12,
-        "limite_credito": 50000.0
+        "limite_credito": 50000.0,
+        "id": 20
     },
     {
         "codigo_cliente": 22,
@@ -333,7 +353,8 @@
         "pais": "Spain",
         "codigo_postal": "12320",
         "codigo_empleado_rep_ventas": 12,
-        "limite_credito": 30000.0
+        "limite_credito": 30000.0,
+        "id": 21
     },
     {
         "codigo_cliente": 23,
@@ -349,7 +370,8 @@
         "pais": "Spain",
         "codigo_postal": "11310",
         "codigo_empleado_rep_ventas": 12,
-        "limite_credito": 60000.0
+        "limite_credito": 60000.0,
+        "id": 22
     },
     {
         "codigo_cliente": 24,
@@ -365,7 +387,8 @@
         "pais": "Spain",
         "codigo_postal": "28970",
         "codigo_empleado_rep_ventas": 30,
-        "limite_credito": 7430.0
+        "limite_credito": 7430.0,
+        "id": 23
     },
     {
         "codigo_cliente": 25,
@@ -381,7 +404,8 @@
         "pais": "Spain",
         "codigo_postal": "28574",
         "codigo_empleado_rep_ventas": 5,
-        "limite_credito": 4500.0
+        "limite_credito": 4500.0,
+        "id": 24
     },
     {
         "codigo_cliente": 26,
@@ -397,7 +421,8 @@
         "pais": "Spain",
         "codigo_postal": "29874",
         "codigo_empleado_rep_ventas": 9,
-        "limite_credito": 76000.0
+        "limite_credito": 76000.0,
+        "id": 25
     },
     {
         "codigo_cliente": 27,
@@ -413,7 +438,8 @@
         "pais": "Spain",
         "codigo_postal": "37845",
         "codigo_empleado_rep_ventas": 9,
-        "limite_credito": 100500.0
+        "limite_credito": 100500.0,
+        "id": 26
     },
     {
         "codigo_cliente": 28,
@@ -429,7 +455,8 @@
         "pais": "Spain",
         "codigo_postal": "28904",
         "codigo_empleado_rep_ventas": 30,
-        "limite_credito": 8040.0
+        "limite_credito": 8040.0,
+        "id": 27
     },
     {
         "codigo_cliente": 29,
@@ -445,7 +472,8 @@
         "pais": "Spain",
         "codigo_postal": "28574",
         "codigo_empleado_rep_ventas": 5,
-        "limite_credito": 5500.0
+        "limite_credito": 5500.0,
+        "id": 28
     },
     {
         "codigo_cliente": 30,
@@ -461,7 +489,8 @@
         "pais": "Spain",
         "codigo_postal": "28978",
         "codigo_empleado_rep_ventas": 30,
-        "limite_credito": 1050.0
+        "limite_credito": 1050.0,
+        "id": 29
     },
     {
         "codigo_cliente": 31,
@@ -477,7 +506,8 @@
         "pais": "Spain",
         "codigo_postal": "28978",
         "codigo_empleado_rep_ventas": 30,
-        "limite_credito": 13000.0
+        "limite_credito": 13000.0,
+        "id": 30
     },
     {
         "codigo_cliente": 32,
@@ -493,7 +523,8 @@
         "pais": "Spain",
         "codigo_postal": "28990",
         "codigo_empleado_rep_ventas": 30,
-        "limite_credito": 15000.0
+        "limite_credito": 15000.0,
+        "id": 31
     },
     {
         "codigo_cliente": 33,
@@ -509,7 +540,8 @@
         "pais": "Spain",
         "codigo_postal": "28970",
         "codigo_empleado_rep_ventas": 9,
-        "limite_credito": 12000.0
+        "limite_credito": 12000.0,
+        "id": 32
     },
     {
         "codigo_cliente": 34,
@@ -525,7 +557,8 @@
         "pais": "Spain",
         "codigo_postal": "28970",
         "codigo_empleado_rep_ventas": 30,
-        "limite_credito": 50000.0
+        "limite_credito": 50000.0,
+        "id": 33
     },
     {
         "codigo_cliente": 35,
@@ -541,7 +574,8 @@
         "pais": "Spain",
         "codigo_postal": "28947",
         "codigo_empleado_rep_ventas": 30,
-        "limite_credito": 25000.0
+        "limite_credito": 25000.0,
+        "id": 34
     },
     {
         "codigo_cliente": 36,
@@ -557,7 +591,8 @@
         "pais": "Spain",
         "codigo_postal": "29643",
         "codigo_empleado_rep_ventas": 18,
-        "limite_credito": 6000.0
+        "limite_credito": 6000.0,
+        "id": 35
     },
     {
         "codigo_cliente": 37,
@@ -573,7 +608,8 @@
         "pais": "United Kingdom",
         "codigo_postal": "65930",
         "codigo_empleado_rep_ventas": 18,
-        "limite_credito": 10000.0
+        "limite_credito": 10000.0,
+        "id": 36
     },
     {
         "codigo_cliente": 38,
@@ -589,7 +625,8 @@
         "pais": "Australia",
         "codigo_postal": "2003",
         "codigo_empleado_rep_ventas": 31,
-        "limite_credito": 8000.0
+        "limite_credito": 8000.0,
+        "id": 37
     },
     {
         "codigo_cliente": "5458",

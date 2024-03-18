@@ -106,7 +106,7 @@ def postCliente():
                     raise Exception("Su limite de credito no cumple con el estandar establecido")  
         except Exception as error:
             print(error)
-    pet=requests.post("http://172.16.100.133:5506", data=json.dumps(cliente))
+    pet=requests.post("http://172.16.103.37:5506", data=json.dumps(cliente))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]

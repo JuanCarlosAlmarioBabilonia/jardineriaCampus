@@ -5,15 +5,15 @@ import os
 import requests
 from tabulate import tabulate
 def getAllDataCli():
-    pet=requests.get("http://172.16.100.133:5506")
+    pet=requests.get("http://172.16.103.37:5506")
     data=pet.json()
     return data
 def getAllDataEmp():
-    pet=requests.get("http://172.16.100.133:5507")
+    pet=requests.get("http://172.16.103.37:5507")
     data=pet.json()
     return data
 def getAllDataPa():
-    pet=requests.get("http://172.16.100.133:5508")
+    pet=requests.get("http://172.16.103.37:5508")
     data=pet.json()
     return data
 def getClienteCodigo(codigo):
@@ -222,7 +222,6 @@ REPORTES DE LOS CLIENTES
         op=int(input("Seleccione una de las opciones: "))
         if(op==1):
             print(tabulate(getAllClientesName(),headers="keys",tablefmt="grid"))
-            print(...)
         elif(op==2):
             try:
                codigoCliente=int(input("Ingrese el codigo del cliente: "))
