@@ -77,25 +77,64 @@ def postEmpleados():
                 empleado["puesto"] = puesto
                 break
             else:
-                raise Exception("El puesto no cumple con el estándar establecido")
-                 
+                raise Exception("El puesto no cumple con el estándar establecido")                 
         except Exception as error:
             print(error)
-    pet=requests.post("http://172.16.100.133:5507", data=json.dumps(empleado))
+    pet=requests.post("http://172.16.103.26:5507", data=json.dumps(empleado))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]
+def deleteEmpleado(id):
+    data=gEm.getAllCodeEmp(id)
+    if(len(data)):
+        while True:
+            try:
+                print("""
+¿DESEA ELIMINAR COMPLETAMENTE EL EMPLEADO?
+1. Si
+2. No
+               """)
+                afirm = input("Selecione una de las opciones: ")
+                if(re.match(r'^[1-2]$', afirm)is not None):
+                        afirm=int(afirm)
+                        if (afirm==1):
+                            pet=requests.delete(f"http://172.16.103.26:5507/empleado/{id}")
+                            if(pet.status_code==204):
+                                return[{"Mensaje": "El empleado ha sido eliminado satisfactoriamente"}]
+                            break
+                        else:
+                            return[{"Mensaje": "Eliminacion cancelada"}]
+                        
+                else:
+                    raise Exception("El dato ingresado no esta comprendido entre los estandares solicitados")
+            except Exception as error:
+                print(error)
+    else:
+        return{
+            "Body":[{
+            "Mensaje":"El producto no ha sido encontrado",
+            "ID":id
+            }],
+            "Status":400
+        }
 def menu():
     while True:
         os.system("clear")
         print("""
 ADMINISTRACION DE EMPLEADOS
-1.Guardar un empleado
-0.Atras
+0. Atras
+1. Guardar un empleado
+2. Eliminar un empleado
               """)
-        op = int(input("Selecione una de las opciones: "))
+        op = (input("Selecione una de las opciones: "))
+        if(re.match(r'^[0-2]$', op)is not None):
+            op=int(op)
         if(op==1):
             print(tabulate(postEmpleados(),tablefmt="grid"))
             input("Precione una tecla para continuar.....")
+        elif(op==2):
+            idProducto=int(input("Ingrese el id del producto que desea eliminar:"))
+            print(tabulate(deleteEmpleado(idProducto),tablefmt="grid"))
+            input("...")
         elif(op== 0):
             break

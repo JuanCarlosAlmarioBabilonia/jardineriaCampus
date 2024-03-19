@@ -85,7 +85,7 @@ def postProducto():
                 
         except Exception as error:
             print(error)
-    pet=requests.post("http://172.16.100.133:5503", data=json.dumps(producto))
+    pet=requests.post("http://172.16.103.26:5503", data=json.dumps(producto))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]
@@ -204,7 +204,7 @@ def updateProducto(id):
                 except Exception as error:
                     print(error)
                     
-            pet=requests.put(f"http://192.168.20.37:5503/producto/{id}", data=json.dumps(producto))
+            pet=requests.put(f"http://172.16.103.26:5503/producto/{id}", data=json.dumps(producto))
             res=pet.json()
             res["Mensaje"] = "Producto Guardado"
             return [res]

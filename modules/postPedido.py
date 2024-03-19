@@ -68,7 +68,7 @@ def postPedido():
                     raise Exception("El codigo del cliente no cumple con el estandar establecido")
         except Exception as error:        
             print(error)
-    pet=requests.post("http://172.16.100.133:5510", data=json.dumps(pedido))
+    pet=requests.post("http://172.16.103.26:5510", data=json.dumps(pedido))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]

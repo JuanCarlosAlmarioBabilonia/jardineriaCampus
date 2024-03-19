@@ -3,7 +3,7 @@ import os
 from tabulate import tabulate
 from datetime import datetime
 def getAllDataPed():
-    pet=requests.get("http://172.16.100.133:5510")
+    pet=requests.get("http://172.16.103.26:5510")
     data=pet.json()
     return data
 def getPedidoCode(codigo):

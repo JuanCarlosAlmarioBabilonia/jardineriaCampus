@@ -3,10 +3,13 @@ import os
 import requests
 from tabulate import tabulate
 def getAllDataEmp():
-    pet=requests.get("http://172.16.100.133:5507")
+    pet=requests.get("http://172.16.103.26:5507")
     data=pet.json()
     return data
 def getAllCodeEmp(codigo):
+    pet=requests.get(f"http://172.16.103.26:5507/empleado/{codigo}")
+    return [pet.json()] if pet.ok else[]
+def getAllCodeEmp2(codigo):
     for val in getAllDataEmp():
         if(val.get("codigo_empleado") == codigo):
             return [val]   
