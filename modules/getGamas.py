@@ -1,6 +1,6 @@
 import requests
 def getAllGama():
-    pet=requests.get("http://172.16.103.37:5505")
+    pet=requests.get("http://192.168.20.37:5505")
     data=pet.json()
     return data
 def getAllNombre():

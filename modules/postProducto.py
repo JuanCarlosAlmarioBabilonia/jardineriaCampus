@@ -85,25 +85,40 @@ def postProducto():
                 
         except Exception as error:
             print(error)
-    pet=requests.post("http://172.16.103.37:5503", data=json.dumps(producto))
+    pet=requests.post("http://192.168.20.37:5503", data=json.dumps(producto))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]
 def deleteProducto(id):
     data=gP.getProductCodigo(id)
     if(len(data)):
-        pet=requests.delete(f"http://172.16.103.37:5503/producto/{id}")
-        if(pet.status_code==204):
-            data.append({"Mensaje": "El producto ha sido eliminado satisfactoriamente"})
-            return{
-                "Body":data,
-                "Status":pet.status_code,
-            }
+        while True:
+            try:
+                print("""
+¿DESEA ELIMINAR COMPLETAMENTE EL PRODUCTO?
+1. Si
+2. No
+               """)
+                afirm = (input("Selecione una de las opciones: "))
+                if(re.match(r'^[1-2]$', afirm)is not None):
+                        afirm=int(afirm)
+                        if (afirm==1):
+                            pet=requests.delete(f"http://192.168.20.37:5503/producto/{id}")
+                            if(pet.status_code==204):
+                                return[{"Mensaje": "El producto ha sido eliminado satisfactoriamente"}]
+                            break
+                        else:
+                            return[{"Mensaje": "Eliminacion cancelada"}]
+                        
+                else:
+                    raise Exception("El dato ingresado no esta comprendido entre los estandares solicitados")
+            except Exception as error:
+                print(error)
     else:
         return{
             "Body":[{
-                "Mensaje":"El producto no ha sido encontrado",
-                "ID":id
+            "Mensaje":"El producto no ha sido encontrado",
+            "ID":id
             }],
             "Status":400
         }
@@ -188,18 +203,19 @@ def updateProducto(id):
                             raise Exception("El precio de venta del producto no cumple con el estandar establecido")                    
                 except Exception as error:
                     print(error)
-                    pet=requests.put(f"http://172.16.103.37:5503/producto/{id}", data=json.dumps(producto))
-                    res=pet.json()
-                    res["Mensaje"] = "Producto Guardado"
-                    return [res]
+                    
+            pet=requests.put(f"http://192.168.20.37:5503/producto/{id}", data=json.dumps(producto))
+            res=pet.json()
+            res["Mensaje"] = "Producto Guardado"
+            return [res]
     else:
-        return{
-            "Body":[{
-                "Mensaje":"El producto no ha sido encontrado",
-                "ID":id
-            }],
-                "Status":400
-            }
+        return[{
+            "message": "Producto no encontrado",
+            "id": id
+        }]
+        #print(tabulate(mensaje, tablefmt="grid"))
+        #idProducto=int(input("Ingrese el id del producto que desea actualizar:"))
+        #print(tabulate(updateProducto(idProducto),tablefmt="grid"))
 def menu():
     while True:
         os.system("clear")
@@ -218,11 +234,11 @@ ADMINISTRACION DE PRODUCTOS
             input("Presione una tecla para continuar.....")
         elif(op==2):
             idProducto=int(input("Ingrese el id del producto que desea eliminar:"))
-            print(tabulate(deleteProducto(idProducto)["Body"],tablefmt="grid"))
+            print(tabulate(deleteProducto(idProducto),tablefmt="grid"))
             input("...")
         elif(op==3):
             idProducto=int(input("Ingrese el id del producto que desea actualizar:"))
-            print(tabulate(updateProducto(idProducto)["Body"],tablefmt="grid"))
+            print(tabulate(updateProducto(idProducto),tablefmt="grid"))
             input("...")
         elif(op== 0):
             break

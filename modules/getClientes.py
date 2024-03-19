@@ -5,21 +5,24 @@ import os
 import requests
 from tabulate import tabulate
 def getAllDataCli():
-    pet=requests.get("http://172.16.103.37:5506")
+    pet=requests.get("http://192.168.20.37:5506")
     data=pet.json()
     return data
 def getAllDataEmp():
-    pet=requests.get("http://172.16.103.37:5507")
+    pet=requests.get("http://192.168.20.37:5507")
     data=pet.json()
     return data
 def getAllDataPa():
-    pet=requests.get("http://172.16.103.37:5508")
+    pet=requests.get("http://192.168.20.37:5508")
     data=pet.json()
     return data
 def getClienteCodigo(codigo):
+    pet=requests.get(f"http://192.168.20.37:5506/cliente/{codigo}")
+    return [pet.json()] if pet.ok else[]
+def getClienteCodigo2(codigo):
     for val in getAllDataCli():
-        if(val.get("codigo_cliente") == codigo):
-            return [val]
+        if(val.get("codigo_producto") == codigo):
+             return [val]
 def getAllClientesName():
     clienteName = []
     for val in getAllDataCli():

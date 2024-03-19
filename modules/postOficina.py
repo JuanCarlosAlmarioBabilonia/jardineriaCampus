@@ -73,7 +73,7 @@ def postOficina():
                 raise Exception("Su linea de direccion secundaria no cumple con el estandar establecido")   
         except Exception as error:
             print(error)
-    pet=requests.post("http://172.16.103.37:5509", data=json.dumps(oficina))
+    pet=requests.post("http://192.168.20.37:5509", data=json.dumps(oficina))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]
