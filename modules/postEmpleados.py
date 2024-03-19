@@ -81,7 +81,7 @@ def postEmpleados():
                  
         except Exception as error:
             print(error)
-    pet=requests.post("http://192.168.20.37:5507", data=json.dumps(empleado))
+    pet=requests.post("http://172.16.100.133:5507", data=json.dumps(empleado))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]

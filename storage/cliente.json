@@ -1,5 +1,5 @@
 {
-    "cliente":[
+    "cliente": [
         {
             "codigo_cliente": 1,
             "nombre_cliente": "GoldFish Garden",
@@ -645,22 +645,6 @@
             "codigo_empleado_rep_ventas": "dsgtg",
             "limite_credito": 5000,
             "id": 38
-        },
-        {
-            "codigo_producto": 25,
-            "nombre_cliente": "kjashdkjash",
-            "nombre_contacto": "akjshkjahdf",
-            "apellido_contacto": "akjsdhkjadsh",
-            "telefono": 154789524,
-            "fax": 451236587,
-            "linea_direccion1": "B-58",
-            "ciudad": "Oli",
-            "region": "Oli",
-            "pais": "Oli",
-            "codigo_postal": 15425,
-            "codigo_empleado_rep_ventas": 9,
-            "limite_credito": 6500.0,
-            "id": 39
         }
     ]
 }

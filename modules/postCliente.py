@@ -106,7 +106,7 @@ def postCliente():
                     raise Exception("Su limite de credito no cumple con el estandar establecido")  
         except Exception as error:
             print(error)
-    pet=requests.post("http://192.168.20.37:5506", data=json.dumps(cliente))
+    pet=requests.post("http://172.16.100.133:5506", data=json.dumps(cliente))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]
@@ -124,7 +124,7 @@ def deleteCliente(id):
                 if(re.match(r'^[1-2]$', afirm)is not None):
                         afirm=int(afirm)
                         if (afirm==1):
-                            pet=requests.delete(f"http://192.168.20.37:5506/cliente/{id}")
+                            pet=requests.delete(f"http://172.16.100.133:5506/cliente/{id}")
                             if(pet.status_code==204):
                                 return[{"Mensaje": "El cliente ha sido eliminado satisfactoriamente"}]
                             break
