@@ -1,6 +1,6 @@
 import requests
 def getAllCodeOf():
-    pet=requests.get("http://172.16.100.125:5515")
+    pet=requests.get("http://154.38.171.54:5005/oficinas")
     data=pet.json()
     return data
 def getAllNameOf():

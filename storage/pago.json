@@ -1,4 +1,7 @@
+{
+    "pagos":
 [
+    
     {
         "codigo_cliente": 1,
         "forma_pago": "PayPal",
@@ -280,3 +283,4 @@
         "id": 37
     }
 ]
+}

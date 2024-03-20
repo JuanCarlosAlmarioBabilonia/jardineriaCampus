@@ -57,7 +57,7 @@ def postPagos():
         
         except Exception as error:        
             print(error)
-    pet=requests.post("http://172.16.100.125:5508", data=json.dumps(pagos))
+    pet=requests.post("http://154.38.171.54:5006/pagos", data=json.dumps(pagos))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]

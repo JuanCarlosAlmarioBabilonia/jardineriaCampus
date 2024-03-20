@@ -70,17 +70,20 @@ def postEmpleados():
                     raise Exception("El codigo del cliente no cumple con el estandar establecido")
             
             if not empleado.get("puesto"):
-                puesto= input("Seleccione su puesto:\n" + "".join([f"\t{i}. {val}\n" for i, val in enumerate(gPu.getAllTipoPu())]))
-            if re.match(r'^[0-4]$', puesto) is not None:  
-                puesto = int(puesto)
-                puesto = gPu.getAllTipoPu()[puesto]
-                empleado["puesto"] = puesto
+                puesto= input("""Ingrese su puesto
+1. Subdirector Marketing
+2. Secretaria
+3. Director General
+4. Representante Ventas""")
+            if(re.match(r'^[A-Z][a-z]*( [A-Z][a-z]*)*$',puesto)is not None):
+                print(tabulate(data, headers="keys",tablefmt="grid"))
+                empleado["puesto"]=puesto
                 break
             else:
                 raise Exception("El puesto no cumple con el estándar establecido")                 
         except Exception as error:
             print(error)
-    pet=requests.post("http://172.16.100.125:5507", data=json.dumps(empleado))
+    pet=requests.post("http://154.38.171.54:5003/empleados", data=json.dumps(empleado))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]
@@ -98,7 +101,7 @@ def deleteEmpleado(id):
                 if(re.match(r'^[1-2]$', afirm)is not None):
                         afirm=int(afirm)
                         if (afirm==1):
-                            pet=requests.delete(f"http://172.16.100.125:5507/empleado/{id}")
+                            pet=requests.delete(f"http://154.38.171.54:5003/empleados/{id}")
                             if(pet.status_code==204):
                                 return[{"Mensaje": "El empleado ha sido eliminado satisfactoriamente"}]
                             break

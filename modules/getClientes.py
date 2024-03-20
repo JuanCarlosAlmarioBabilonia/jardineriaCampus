@@ -1,23 +1,31 @@
 #import storage.cliente as cli
 #import storage.empleado as em
 #import storage.pago as pa
+#http://154.38.171.54:5001/cliente
+#http://154.38.171.54:5002/detalle_pedido
+#http://154.38.171.54:5003/empleados 
+#http://154.38.171.54:5004/gama
+#http://154.38.171.54:5005/oficinas
+#http://154.38.171.54:5006/pagos
+#http://154.38.171.54:5007/pedidos
+#http://154.38.171.54:5008/productos
 import os
 import requests
 from tabulate import tabulate
 def getAllDataCli():
-    pet=requests.get("http://172.16.100.125:5506")
+    pet=requests.get("http://154.38.171.54:5001/cliente")
     data=pet.json()
     return data
 def getAllDataEmp():
-    pet=requests.get("http://172.16.100.125:5507")
+    pet=requests.get("http://154.38.171.54:5003/empleados")
     data=pet.json()
     return data
 def getAllDataPa():
-    pet=requests.get("http://172.16.100.125:5508")
+    pet=requests.get("http://154.38.171.54:5006/pagos")
     data=pet.json()
     return data
 def getClienteCodigo(codigo):
-    pet=requests.get(f"http://172.16.100.125:5506/cliente/{codigo}")
+    pet=requests.get(f"http://154.38.171.54:5001/cliente/{codigo}")
     return [pet.json()] if pet.ok else[]
 def getClienteCodigo2(codigo):
     for val in getAllDataCli():
@@ -158,6 +166,7 @@ def getAllClienteCiudadRepVentas():
         "Codigo del representante de ventas":val.get("codigo_empleado_rep_ventas")
         })
     return clienteMadrid
+
 def getAllClientesReps():
     clientesRep=[]
     for x in getAllDataCli():
@@ -166,15 +175,16 @@ def getAllClientesReps():
                 clientesRep.append({
                     "Nombre del cliente": x.get("nombre_cliente"),
                     "Nombre del Representante de Ventas":y.get("nombre"),
-                    "Apellidos del Representante de Ventas":f"{y.get('apellido1')} {y.get('apellido2')}" 
+                    "Apellidos del Representante de Ventas":(f"{y.get('apellido1')} {y.get('apellido2')}")
                 })
     return clientesRep
+
 def getAllClientesPagos():
     clientesPago=[]
     for x in getAllDataCli():
         for y in getAllDataEmp():
             for z in getAllDataPa():
-                if x.get("codigo_cliente")==z.get("codigo_cliente") and x.get("codigo_empleado_rep_ventas")==y.get("codigo_empleado") :
+                if x.get("codigo_cliente")==z.get("codigo_cliente") and x.get("codigo_empleado_rep_ventas")==y.get("codigo_empleado"):
                     clientesPago.append({
                         "Codigo del cliente":x.get("codigo_cliente"),
                         "Nombre del cliente": x.get("nombre_cliente"),
@@ -183,27 +193,10 @@ def getAllClientesPagos():
                         "Apellidos del Representante de Ventas":f"{y.get('apellido1')} {y.get('apellido2')}"                         
                     })
     return clientesPago
-# def getAllClientesNoPagos():
-#     clientesNoPago=[]
-#     for a in cli.cliente:
-#        pagos=False
-#        for b in pa.pago:
-#           if a.get("codigo_cliente")==b.get("codigo_cliente"):
-#              pagos=True
-#              break
-#           if not pagos:
-#              for c in em.empleado:
-#                 if a.get("codigo_empleado_rep_ventas")==c.get("codigo_empleado"):
-#                    if c.get("puesto")=="Representante Ventas":
-#                       clientesNoPago.append({
-#                          "Codigo del cliente": a.get("codigo_cliente"),
-#                          "Nombre del cliente": a.get("nombre_cliente"),
-#                          "Puesto": c.get("puesto"),
-#                          "Representante de ventas": c.get("nombre")
-#                       })
-#     return clientesNoPago
+
 def menu():
     while True:
+        os.system("clear")
         print("""
 REPORTES DE LOS CLIENTES
 0. Regresar al menu principal
@@ -220,55 +213,60 @@ REPORTES DE LOS CLIENTES
 11. Obtener los clientes que son de Madrid y que el codigo de su representante de ventas sea 11 o 30
 12. Obtener todos los clientes con su respectivo Representante de Ventas 
 13. Obtener todos los clientes que hayan realizado pagos con su respectivo Representante de Ventas
-14. Obtener todos los clientes que no hayan realizado pagos con su respectivo Representante de Ventas
 """)
-        op=int(input("Seleccione una de las opciones: "))
-        if(op==1):
-            print(tabulate(getAllClientesName(),headers="keys",tablefmt="grid"))
-        elif(op==2):
-            try:
-               codigoCliente=int(input("Ingrese el codigo del cliente: "))
-               print(tabulate(getOneClientCodigo(codigoCliente),headers="keys",tablefmt="grid"))
-            except KeyboardInterrupt:
-               return menu()         
-        elif(op==3):
-            try:
-               limite=float(input("Ingrese el limite de credito de los clientes que desea visualizar: "))
-               ciudad=input("Ingrese el nombre de la ciudad de la que desea filtrar los clientes: ")
-               print(tabulate(getAllClientCreditoCiudad(limite,ciudad),headers="keys",tablefmt="grid"))
-            except KeyboardInterrupt:
-               return menu()              
-        elif(op==4):
-            try:
-               pais=input("Ingrese el pais del cliente con mayuscula(s) inicial(es): ")
-               region=input("Ingrese la region del cliente con mayuscula(s) inicial(es): ")
-               ciudad=input("Ingrese la ciudad del cliente con mayuscula(s) inicial(es): ")
-               print(tabulate(getAllClientPaisRegionCiudad(pais,region,ciudad),headers="keys",tablefmt="grid"))
-            except KeyboardInterrupt:
-               return menu()
-        elif(op==5):
-         print(tabulate(getAllClientCodigoPostal(),headers="keys",tablefmt="grid"))
-        elif(op==6):
-            try:
+        try:
+            op=int(input("Seleccione una de las opciones: "))
+            if(op==1):
+                print(tabulate(getAllClientesName(),headers="keys",tablefmt="grid"))
+                input("Presione una tecla para continuar")
+            elif(op==2):
+                codigoCliente=int(input("Ingrese el codigo del cliente: "))
+                print(tabulate(getOneClientCodigo(codigoCliente),headers="keys",tablefmt="grid"))
+                input("Presione una tecla para continuar")         
+            elif(op==3):
+                limite=float(input("Ingrese el limite de credito de los clientes que desea visualizar: "))
+                ciudad=input("Ingrese el nombre de la ciudad de la que desea filtrar los clientes: ")
+                print(tabulate(getAllClientCreditoCiudad(limite,ciudad),headers="keys",tablefmt="grid"))
+                input("Presione una tecla para continuar")             
+            elif(op==4):
+                pais=input("Ingrese el pais del cliente con mayuscula(s) inicial(es): ")
+                region=input("Ingrese la region del cliente con mayuscula(s) inicial(es): ")
+                ciudad=input("Ingrese la ciudad del cliente con mayuscula(s) inicial(es): ")
+                print(tabulate(getAllClientPaisRegionCiudad(pais,region,ciudad),headers="keys",tablefmt="grid"))
+                input("Presione una tecla para continuar")
+            elif(op==5):
+                print(tabulate(getAllClientCodigoPostal(),headers="keys",tablefmt="grid"))
+                input("Presione una tecla para continuar")
+            elif(op==6):
                 ciudad=input("Ingrese la ciudad con mayuscula(s) inicial(es): ")
                 print(tabulate(getAllClientCiudad(ciudad),headers="keys",tablefmt="grid"))
-            except KeyboardInterrupt:
-                return menu()
-        elif(op==7):
-         print(tabulate(getAllClientDireccion(),headers="keys",tablefmt="grid"))
-        elif(op==8):
-         print(tabulate(getAllClientCreditEntre(),headers="keys",tablefmt="grid"))
-        elif(op==9):
-         print(tabulate(getAllClientCreditEntre(),headers="keys",tablefmt="grid"))
-        elif(op==10):
-         print(tabulate(getAllNombreClienteEspañol(),headers="keys",tablefmt="grid"))
-        elif(op==11):
-         print(tabulate(getAllClienteCiudadRepVentas(),headers="keys",tablefmt="grid"))
-        elif(op==12):
-         print(tabulate(getAllClientesReps(),headers="keys",tablefmt="grid")) 
-        elif(op==13):
-         print(tabulate(getAllClientesPagos(),headers="keys",tablefmt="grid")) 
-        # elif(op==14):
-        #  print(tabulate(getAllClientesNoPagos(),headers="keys",tablefmt="grid"))   
-        elif(op==0):
+                input("Presione una tecla para continuar")
+            elif(op==7):
+                print(tabulate(getAllClientDireccion(),headers="keys",tablefmt="grid"))
+                input("Presione una tecla para continuar")
+            elif(op==8):
+                print(tabulate(getAllClientCreditEntre(),headers="keys",tablefmt="grid"))
+                input("Presione una tecla para continuar")
+            elif(op==9):
+                print(tabulate(getAllClientTelefono(),headers="keys",tablefmt="grid"))
+                input("Presione una tecla para continuar")
+            elif(op==10):
+                print(tabulate(getAllNombreClienteEspañol(),headers="keys",tablefmt="grid"))
+                input("Presione una tecla para continuar")
+            elif(op==11):
+                print(tabulate(getAllClienteCiudadRepVentas(),headers="keys",tablefmt="grid"))
+                input("Presione una tecla para continuar")
+                
+            elif(op==12):
+                print(tabulate(getAllClientesReps(),headers="keys",tablefmt="grid"))
+                input("Presione una tecla para continuar")
+                
+            elif(op==13):
+                print(tabulate(getAllClientesPagos(),headers="keys",tablefmt="grid")) 
+                input("Presione una tecla para continuar")
+                
+            elif(op==0):
+                break
+            
+        except KeyboardInterrupt:
             break

@@ -1,6 +1,6 @@
 import requests
 def getAllPagos():
-    pet=requests.get("http://172.16.100.125:5512")
+    pet=requests.get("http://154.38.171.54:5006/pagos")
     data=pet.json()
     return data
 def getAllTipoP():

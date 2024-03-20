@@ -3,7 +3,7 @@ import requests
 import os
 from tabulate import tabulate
 def getAllDataPa():
-    pet=requests.get("http://172.16.100.125:5508")
+    pet=requests.get("http://154.38.171.54:5006/pagos")
     data=pet.json()
     return data
 def getPagoCodigo(codigo):

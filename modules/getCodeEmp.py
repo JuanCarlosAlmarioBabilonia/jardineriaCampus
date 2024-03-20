@@ -1,6 +1,6 @@
 import requests
 def getAllCodes():
-    pet=requests.get("http://172.16.100.125:5514")
+    pet=requests.get("http://154.38.171.54:5003/empleados")
     data=pet.json()
     return data
 def getAllCoEmp():
