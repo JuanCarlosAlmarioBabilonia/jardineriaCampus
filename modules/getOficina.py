@@ -2,11 +2,11 @@ import requests
 import os
 from tabulate import tabulate
 def getAllDataOf():
-    pet=requests.get("http://172.16.103.26:5509")
+    pet=requests.get("http://172.16.100.125:5509")
     data=pet.json()
     return data
 def getOficinaCodigo(codigo):
-    pet=requests.get(f"http://172.16.103.26:5509/oficina/{codigo}")
+    pet=requests.get(f"http://172.16.100.125:5509/oficina/{codigo}")
     return [pet.json()] if pet.ok else[]
 def getOficinaCodigo2(codigo):
     for val in getAllDataOf():

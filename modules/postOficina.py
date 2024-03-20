@@ -73,7 +73,7 @@ def postOficina():
                 raise Exception("Su linea de direccion secundaria no cumple con el estandar establecido")   
         except Exception as error:
             print(error)
-    pet=requests.post("http://172.16.103.26:5509", data=json.dumps(oficina))
+    pet=requests.post("http://172.16.100.125:5509", data=json.dumps(oficina))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]
@@ -91,7 +91,7 @@ def deleteOficina(id):
                 if(re.match(r'^[1-2]$', afirm)is not None):
                         afirm=int(afirm)
                         if (afirm==1):
-                            pet=requests.delete(f"http://172.16.103.26:5509/oficina/{id}")
+                            pet=requests.delete(f"http://172.16.100.125:5509/oficina/{id}")
                             if(pet.status_code==204):
                                 return[{"Mensaje": "El cliente ha sido eliminado satisfactoriamente"}]
                             break
@@ -119,7 +119,7 @@ ADMINISTRACION DE OFICINAS
 1. Guardar una oficina
 2. Eliminar una oficina
               """)
-        op = int(input("Selecione una de las opciones: "))
+        op = (input("Selecione una de las opciones: "))
         if(re.match(r'^[0-2]$', op)is not None):
             op=int(op)
         if(op==1):

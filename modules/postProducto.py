@@ -85,7 +85,7 @@ def postProducto():
                 
         except Exception as error:
             print(error)
-    pet=requests.post("http://172.16.103.26:5503", data=json.dumps(producto))
+    pet=requests.post("http://172.16.100.125:5503", data=json.dumps(producto))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]
@@ -103,7 +103,7 @@ def deleteProducto(id):
                 if(re.match(r'^[1-2]$', afirm)is not None):
                         afirm=int(afirm)
                         if (afirm==1):
-                            pet=requests.delete(f"http://172.16.100.133:5503/producto/{id}")
+                            pet=requests.delete(f"http://172.16.100.125:5503/producto/{id}")
                             if(pet.status_code==204):
                                 return[{"Mensaje": "El producto ha sido eliminado satisfactoriamente"}]
                             break
@@ -204,7 +204,7 @@ def updateProducto(id):
                 except Exception as error:
                     print(error)
                     
-            pet=requests.put(f"http://172.16.103.26:5503/producto/{id}", data=json.dumps(producto))
+            pet=requests.put(f"http://172.16.100.125:5503/producto/{id}", data=json.dumps(producto))
             res=pet.json()
             res["Mensaje"] = "Producto Guardado"
             return [res]
