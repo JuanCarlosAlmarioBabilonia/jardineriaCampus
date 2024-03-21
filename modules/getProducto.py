@@ -21,7 +21,7 @@ def getProductCodigo2(codigo):
 def getAllProductosOrnamentales(gama,stock):
     condiciones=[]
     for val in getAllData():
-        if(val.get("gama")==gama) and (val.get("cantidad_en_stock")>=stock):
+        if(val.get("gama")==gama) and (val.get("cantidadEnStock")>=stock):
             condiciones.append(val)
     def price(val):
         return val.get("precio_venta")
@@ -31,7 +31,7 @@ def getAllProductosOrnamentales(gama,stock):
         "Codigo del Producto":val.get("codigo_producto"),
         "Nombre":val.get("nombre"),  
         "Gama":val.get("gama"),
-        "Cantidad en stock":val.get("cantidad_en_stock"),  
+        "Cantidad en stock":val.get("cantidadEnStock"),  
         "Precio de venta":val.get("precio_venta"),  
         "Precio al proveedor":val.get("precio_proveedor")      
     }  
