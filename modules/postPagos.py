@@ -148,7 +148,7 @@ def updatePagos(id):
                         raise Exception("Su limite de credito no cumple con el estandar establecido")         
             except Exception as error:        
                 print(error)
-        pet=requests.post(f"http://154.38.171.54:5006/pagos/{id}", data=json.dumps(pagos))
+        pet=requests.put(f"http://154.38.171.54:5006/pagos/{id}", data=json.dumps(pagos))
         res=pet.json()
         res["Mensaje"] = "Producto Guardado"
         return [res]
@@ -163,7 +163,7 @@ ADMINISTRACION DE PAGOS
 3. Actualizar un pago
               """)
         op = (input("Selecione una de las opciones: "))
-        if(re.match(r'^[0-2]$', op)is not None):
+        if(re.match(r'^[0-3]$', op)is not None):
             op=int(op)
         if(op==1):
             print(tabulate(postPagos(),tablefmt="grid"))
@@ -173,7 +173,7 @@ ADMINISTRACION DE PAGOS
             print(tabulate(deletePagos(idProducto),tablefmt="grid"))
             input("...")
         elif(op==3):
-            idProducto=int(input("Ingrese el id del producto que desea actualizar:"))
+            idProducto=(input("Ingrese el id del producto que desea actualizar:"))
             print(tabulate(updatePagos(idProducto),tablefmt="grid"))
             input("...")
         elif(op== 0):

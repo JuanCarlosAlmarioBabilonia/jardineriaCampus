@@ -54,7 +54,7 @@ def postEmpleados():
                 
             if not empleado.get("codigo_oficina"):
                 codigo_oficina= input("Seleccione el codigo de la oficina:\n" + "".join([f"\t{i}. {val}\n" for i, val in enumerate(gCof.getAllNameOf())]))
-            if re.match(r'^[0-8]$', codigo_oficina) is not None:  
+            if re.match(r'^[0-9]{2}$', codigo_oficina) is not None:  
                 codigo_oficina = int(codigo_oficina)
                 codigo_oficina = gCof.getAllNameOf()[codigo_oficina]
                 empleado["codigo_oficina"] = codigo_oficina
@@ -195,7 +195,7 @@ def updateEmpleado(id):
                     raise Exception("El puesto no cumple con el estándar establecido")                 
             except Exception as error:
                 print(error)
-    pet=requests.post(f"http://154.38.171.54:5003/empleados/{id}", data=json.dumps(empleado))
+    pet=requests.put(f"http://154.38.171.54:5003/empleados/{id}", data=json.dumps(empleado))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]
@@ -217,11 +217,11 @@ ADMINISTRACION DE EMPLEADOS
             print(tabulate(postEmpleados(),tablefmt="grid"))
             input("Precione una tecla para continuar.....")
         elif(op==2):
-            idProducto=int(input("Ingrese el id del empleado que desea eliminar:"))
+            idProducto=(input("Ingrese el id del empleado que desea eliminar:"))
             print(tabulate(deleteEmpleado(idProducto),tablefmt="grid"))
             input("...")
         elif(op==3):
-            idProducto=int(input("Ingrese el id del empleado que desea actualizar:"))
+            idProducto=(input("Ingrese el id del empleado que desea actualizar:"))
             print(tabulate(updateEmpleado(idProducto),tablefmt="grid"))
             input("...")
         elif(op== 0):

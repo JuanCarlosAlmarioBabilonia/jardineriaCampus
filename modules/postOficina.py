@@ -128,62 +128,66 @@ def updateOficina(id):
             
                 if(not oficina.get("ciudad")):
                     ciudad=input("Ingrese la ciudad de la oficina: ")
-                if(re.match(r'^([A-Za-z][a-z]*\s*)+$',ciudad)is not None):
-                    oficina["ciudad"]=ciudad
-                else:
-                    raise Exception("La ciudad de la oficina no cumple con el estandar establecido")  
+                    if(re.match(r'^([A-Za-z][a-z]*\s*)+$',ciudad)is not None):
+                        oficina["ciudad"]=ciudad
+                    else:
+                        raise Exception("La ciudad de la oficina no cumple con el estandar establecido")  
                     
                 if(not oficina.get("region")):
                     region=input("Ingrese la region de la oficina: ")
-                if(re.match(r'^([A-Za-z][a-z]*\s*)+$',region)is not None):
-                    oficina["region"]=region
-                else:
+                    if(re.match(r'^([A-Za-z][a-z]*\s*)+$',region)is not None):
+                        oficina["region"]=region
+                    else:
                         raise Exception("La region de la oficina no cumple con el estandar establecido")  
                 
                 if(not oficina.get("pais")):
                     pais=input("Ingrese el pais de la oficina: ")
-                if(re.match(r'^([A-Za-z][a-z]*\s*)+$',pais)is not None):
+                    if(re.match(r'^([A-Za-z][a-z]*\s*)+$',pais)is not None):
                         oficina["pais"]=pais
-                else:
-                    raise Exception("El pais de la oficina no cumple con el estandar establecido")
+                    else:
+                        raise Exception("El pais de la oficina no cumple con el estandar establecido")
                 
                 if(not oficina.get("codigo_postal")):
                     codigo_postal=input("Ingrese su codigo postal: ")
-                if(re.match(r'^[0-9]{5}$',codigo_postal)is not None):
+                    if(re.match(r'^[0-9]{5}$',codigo_postal)is not None):
                         codigo_postal= int(codigo_postal)
                         oficina["codigo_postal"]=codigo_postal
-                else:
-                    raise Exception("El codigo postal de la oficina no cumple con el estandar establecido")
+                    else:
+                        raise Exception("El codigo postal de la oficina no cumple con el estandar establecido")
                 
                 if(not oficina.get("telefono")):
                     telefono=input("Ingrese su telefono: ")
-                if(re.match(r'^[0-9]{10}$',telefono)is not None):
+                    if(re.match(r'^[0-9]{10}$',telefono)is not None):
                         telefono= int(telefono)
                         oficina["telefono"]=telefono
-                else:
-                    raise Exception("El telefono de la oficina no cumple con el estandar establecido")
+                    else:
+                        raise Exception("El telefono de la oficina no cumple con el estandar establecido")
                 
                 if(not oficina.get("linea_direccion1")):
                     linea_direccion1=input("Ingrese su direccion principal: ")
-                if(re.match(r'^[0-9A-Za-z\s]+$',linea_direccion1)is not None):
+                    if(re.match(r'^[0-9A-Za-z\s]+$',linea_direccion1)is not None):
                         oficina["linea_direccion1"]=linea_direccion1
-                else:
-                    raise Exception("Su linea de direccion principal no cumple con el estandar establecido")   
+                    else:
+                        raise Exception("Su linea de direccion principal no cumple con el estandar establecido")   
                     
                 if(not oficina.get("linea_direccion2")):
                     linea_direccion2=input("Ingrese su direccion principal: ")
-                if(re.match(r'^[0-9A-Za-z\s]+$',linea_direccion2)is not None):
-                    oficina["linea_direccion2"]=linea_direccion2
-                    break
-                else:
-                    raise Exception("Su linea de direccion secundaria no cumple con el estandar establecido")   
+                    if(re.match(r'^[0-9A-Za-z\s]+$',linea_direccion2)is not None):
+                        oficina["linea_direccion2"]=linea_direccion2
+                        break
+                    else:
+                        raise Exception("Su linea de direccion secundaria no cumple con el estandar establecido")   
             except Exception as error:
                 print(error)
-        pet=requests.post(f"http://154.38.171.54:5005/oficinas/{id}", data=json.dumps(oficina))
+        pet=requests.put(f"http://154.38.171.54:5005/oficinas/{id}", data=json.dumps(oficina))
         res=pet.json()
         res["Mensaje"] = "Producto Guardado"
         return [res]
-                 
+    else:
+        return[{
+            "message": "Producto no encontrado",
+            "id": id
+        }]                
 def menu():
     while True:
         os.system("clear")
@@ -201,11 +205,11 @@ ADMINISTRACION DE OFICINAS
             print(tabulate(postOficina(),tablefmt="grid"))
             input("Precione una tecla para continuar.....")
         elif(op==2):
-            idProducto=int(input("Ingrese el id de la oficina que desea eliminar:"))
+            idProducto=(input("Ingrese el id de la oficina que desea eliminar:"))
             print(tabulate(deleteOficina(idProducto),tablefmt="grid"))
             input("...")
         elif(op==3):
-            idProducto=int(input("Ingrese el id del oficina que desea actualizar:"))
+            idProducto=(input("Ingrese el id del oficina que desea actualizar:"))
             print(tabulate(updateOficina(idProducto),tablefmt="grid"))
             input("...")
         elif(op== 0):

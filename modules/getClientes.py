@@ -29,7 +29,7 @@ def getClienteCodigo(codigo):
     return [pet.json()] if pet.ok else[]
 def getClienteCodigo2(codigo):
     for val in getAllDataCli():
-        if(val.get("codigo_producto") == codigo):
+        if(val.get("codigo_cliente") == codigo):
              return [val]
 def getAllClientesName():
     clienteName = []

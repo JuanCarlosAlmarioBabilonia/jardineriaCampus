@@ -13,7 +13,7 @@ def postCliente():
                 codigo_cliente=input("Ingrese el codigo del cliente: ")
                 if(re.match(r'^[0-9]+$',codigo_cliente)is not None):
                     codigo_cliente= int(codigo_cliente)
-                    data=gC.getClienteCodigo2(codigo_cliente)
+                    data=gC.getClienteCodigo(codigo_cliente)
                     if(data):
                         print(tabulate(data,tablefmt="grid"))
                         raise Exception("El codigo ya pertenece a un cliente")
@@ -77,7 +77,19 @@ def postCliente():
                     cliente["ciudad"]=ciudad
                 else:
                     raise Exception("Su ciudad no cumple con el estandar establecido")  
-                  
+ 
+            if(not cliente.get("region")):
+                region=input("Ingrese su region: ")
+                if(re.match(r'^([A-Za-z][a-z]*\s*)+$',region)is not None):
+                        cliente["region"]=region
+                else:
+                    raise Exception("Su region no cumple con el estandar establecido")  
+            if(not cliente.get("pais")):
+                pais=input("Ingrese su pais: ")
+                if(re.match(r'^([A-Za-z][a-z]*\s*)+$',pais)is not None):
+                        cliente["pais"]=pais
+                else:
+                    raise Exception("Su pais no cumple con el estandar establecido")                     
             
             if(not cliente.get("codigo_postal")):
                 codigo_postal=input("Ingrese su codigo postal: ")
@@ -87,14 +99,25 @@ def postCliente():
                 else:
                     raise Exception("Su codigo postal no cumple con el estandar establecido")  
                 
-            if(not cliente.get("codigo_empleado_rep_ventas")):
-                codigo_empleado_rep_ventas=input("Seleccione el codigo de su Representante de Ventas:\n" + "".join([f"\t{i}. {val}\n" for i, val in enumerate(gCem.getAllCoEmp())]))
-                if(re.match(r'^[0-9]$',codigo_empleado_rep_ventas)is not None):
-                    codigo_empleado_rep_ventas= int(codigo_empleado_rep_ventas)
-                    codigo_empleado_rep_ventas = gCem.getAllCoEmp()[codigo_empleado_rep_ventas]
-                    cliente["codigo_empleado_rep_ventas"]=codigo_empleado_rep_ventas
-                else:
-                    raise Exception("El codigo de su Representante no cumple con el estandar establecido")  
+            
+            if not cliente.get("codigo_empleado_rep_ventas"):
+                codigo_empleado_rep_ventas= (input("""Ingrese su representante (codigo)
+1. 5
+2. 8
+3. 9
+4. 11
+5. 12
+6. 18
+7. 19
+8. 22
+9. 30
+10. 31
+"""))
+            if(re.match(r'^[0-9]{1,2}$',codigo_empleado_rep_ventas)is not None): 
+                codigo_empleado_rep_ventas=int(codigo_empleado_rep_ventas)
+                cliente["codigo_empleado_rep_ventas"] = codigo_empleado_rep_ventas
+            else:
+                raise Exception("El estado del producto no cumple con el estándar establecido") 
                            
             if(not cliente.get("limite_credito")):
                 limite_credito=input("Ingrese su limite de credito: ")
@@ -214,9 +237,19 @@ def updateCliente(id):
                         if(re.match(r'^([A-Za-z][a-z]*\s*)+$',ciudad)is not None):
                             cliente["ciudad"]=ciudad
                         else:
-                            raise Exception("Su ciudad no cumple con el estandar establecido")  
-                    
-                
+                            raise Exception("Su ciudad no cumple con el estandar establecido")
+                    if(not cliente.get("region")):
+                        region=input("Ingrese su region: ")
+                        if(re.match(r'^([A-Za-z][a-z]*\s*)+$',region)is not None):
+                            cliente["region"]=region
+                        else:
+                            raise Exception("Su region no cumple con el estandar establecido")  
+                    if(not cliente.get("pais")):
+                        pais=input("Ingrese su pais: ")
+                        if(re.match(r'^([A-Za-z][a-z]*\s*)+$',pais)is not None):
+                            cliente["pais"]=pais
+                        else:
+                            raise Exception("Su pais no cumple con el estandar establecido")    
                     if(not cliente.get("codigo_postal")):
                         codigo_postal=input("Ingrese su codigo postal: ")
                         if(re.match(r'^[0-9]{5}$',codigo_postal)is not None):
@@ -225,15 +258,34 @@ def updateCliente(id):
                         else:
                             raise Exception("Su codigo postal no cumple con el estandar establecido")  
                     
-                    if(not cliente.get("codigo_empleado_rep_ventas")):
-                        codigo_empleado_rep_ventas=input("Seleccione el codigo de su Representante de Ventas:\n" + "".join([f"\t{i}. {val}\n" for i, val in enumerate(gCem.getAllCoEmp())]))
-                        if(re.match(r'^[0-9]$',codigo_empleado_rep_ventas)is not None):
-                            codigo_empleado_rep_ventas= int(codigo_empleado_rep_ventas)
-                            codigo_empleado_rep_ventas = gCem.getAllCoEmp()[codigo_empleado_rep_ventas]
-                            cliente["codigo_empleado_rep_ventas"]=codigo_empleado_rep_ventas
+                    if not cliente.get("codigo_empleado_rep_ventas"):
+                        codigo_empleado_rep_ventas= (input("""Ingrese su representante (codigo)
+1. 5
+2. 8
+3. 9
+4. 11
+5. 12
+6. 18
+7. 19
+8. 22
+9. 30
+10. 31
+"""))
+                    if(re.match(r'^[0-9]{1,2}$',codigo_empleado_rep_ventas)is not None): 
+                        codigo_empleado_rep_ventas=int(codigo_empleado_rep_ventas)
+                        cliente["codigo_empleado_rep_ventas"] = codigo_empleado_rep_ventas
+                    else:
+                        raise Exception("El estado del producto no cumple con el estándar establecido") 
+                                
+                    if(not cliente.get("limite_credito")):
+                        limite_credito=input("Ingrese su limite de credito: ")
+                        if(re.match(r'^[0-9]{4,5}$',limite_credito)is not None):
+                            limite_credito= float(limite_credito)
+                            cliente["limite_credito"]=limite_credito
+                            break
                         else:
-                            raise Exception("El codigo de su Representante no cumple con el estandar establecido")  
-                            
+                            raise Exception("Su limite de credito no cumple con el estandar establecido")  
+                                    
                     if(not cliente.get("limite_credito")):
                         limite_credito=input("Ingrese su limite de credito: ")
                         if(re.match(r'^[0-9]{4,5}$',limite_credito)is not None):

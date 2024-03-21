@@ -173,7 +173,7 @@ def updatePedido(id):
                             raise Exception("El codigo del cliente no cumple con el estandar establecido")
                 except Exception as error:        
                     print(error)
-            pet=requests.post(f"http://154.38.171.54:5007/pedidos/{id}", data=json.dumps(pedido))
+            pet=requests.put(f"http://154.38.171.54:5007/pedidos/{id}", data=json.dumps(pedido))
             res=pet.json()
             res["Mensaje"] = "Producto Guardado"
             return [res]    
@@ -194,11 +194,11 @@ ADMINISTRACION DE PEDIDOS
             print(tabulate(postPedido(),tablefmt="grid"))
             input("Precione una tecla para continuar.....")
         elif(op==2):
-            idProducto=int(input("Ingrese el id del pedido que desea eliminar:"))
+            idProducto=(input("Ingrese el id del pedido que desea eliminar:"))
             print(tabulate(deletePedido(idProducto),tablefmt="grid"))
             input("...")
         elif(op==3):
-            idProducto=int(input("Ingrese el id del pedido que desea actualizar:"))
+            idProducto=(input("Ingrese el id del pedido que desea actualizar:"))
             print(tabulate(updatePedido(idProducto),tablefmt="grid"))
             input("...")
         elif(op== 0):

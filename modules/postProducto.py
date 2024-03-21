@@ -5,7 +5,6 @@ import modules.getGamas as gG
 import os
 import re
 import modules.getProducto as gP
-from modules.updateProducto import menuActualizacionProducto
 def postProducto():
     producto=dict()
     while True:
@@ -13,7 +12,7 @@ def postProducto():
             if(not producto.get("codigo_producto")):
                 codigo=input("Ingrese el codigo del producto: ")
                 if(re.match(r'^[A-Z]{2}-[0-9]{2,3}$',codigo)is not None):
-                    data=(gP.getProductCodigo2(codigo))
+                    data=(gP.getProductCodigo(codigo))
                     if(data):
                         print(tabulate(data,headers="keys", tablefmt="grid"))
                         raise Exception("El producto ya existe")
@@ -31,17 +30,17 @@ def postProducto():
                 
             if not producto.get("gama"):
                 gama= input("Seleccione la gama del producto:\n" + "".join([f"\t{i}. {val}\n" for i, val in enumerate(gG.getAllNombre())]))
-            if re.match(r'^[0-4]$', gama) is not None:  
-                gamab = int(gama)
-                gama = gG.getAllNombre()[gamab]
-                producto["gama"] = gama
-            else:
-                raise Exception("La gama del producto no cumple con el estándar establecido")
+                if re.match(r'^[0-4]$', gama) is not None:  
+                    gamab = int(gama)
+                    gama = gG.getAllNombre()[gamab]
+                    producto["gama"] = gama
+                else:
+                    raise Exception("La gama del producto no cumple con el estándar establecido")
             
             if(not producto.get("dimensiones")):
                 dimensiones=input("Ingrese las dimensiones del producto: ")
                 if(re.match(r'^[0-9]{2,3}-[0-9]{2,3}$',dimensiones)is not None):
-                     producto["dimensiones"]=dimensiones
+                    producto["dimensiones"]=dimensiones
                 else:
                     raise Exception("Las dimensiones del producto no cumplen con el estandar establecido")
                 
@@ -82,11 +81,10 @@ def postProducto():
                     producto["precio_proveedor"]=precio_proveedor
                     break
                 else:
-                    raise Exception("El precio de venta del producto no cumple con el estandar establecido")     
-                
+                    raise Exception("El precio de venta del producto no cumple con el estandar establecido")              
         except Exception as error:
             print(error)
-    pet=requests.post("http://154.38.171.54:/productos", data=json.dumps(producto))
+    pet=requests.post("http://154.38.171.54:5008/productos", data=json.dumps(producto))
     res=pet.json()
     res["Mensaje"] = "Producto Guardado"
     return [res]
@@ -129,7 +127,7 @@ def updateProducto(id):
                     if(not producto.get("codigo_producto")):
                         codigo=input("Ingrese el codigo del producto: ")
                         if(re.match(r'^[A-Z]{2}-[0-9]{2,3}$',codigo)is not None):
-                            data=(gP.getProductCodigo2(codigo))
+                            data=(gP.getProductCodigo(codigo))
                             if(data):
                                 print(tabulate(data,headers="keys", tablefmt="grid"))
                                 raise Exception("El producto ya existe")
@@ -229,11 +227,11 @@ ADMINISTRACION DE PRODUCTOS
             print(tabulate(postProducto(),tablefmt="grid"))
             input("Presione una tecla para continuar.....")
         elif(op==2):
-            idProducto=int(input("Ingrese el id del producto que desea eliminar:"))
+            idProducto=(input("Ingrese el id del producto que desea eliminar:"))
             print(tabulate(deleteProducto(idProducto),tablefmt="grid"))
             input("...")
         elif(op==3):
-            idProducto=int(input("Ingrese el id del producto que desea actualizar:"))
+            idProducto=(input("Ingrese el id del producto que desea actualizar:"))
             print(tabulate(updateProducto(idProducto),tablefmt="grid"))
             input("...")
         elif(op== 0):
