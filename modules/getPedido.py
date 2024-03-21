@@ -7,9 +7,8 @@ def getAllDataPed():
     data=pet.json()
     return data
 def getPedidoCode(codigo):
-    for val in getAllDataPed():
-        if(val.get("codigo_pedido") == codigo):
-            return [val]
+    pet=requests.get(f"http://154.38.171.54:5007/pedidos/{codigo}")
+    return [pet.json()] if pet.ok else[]
 def getEstadoPedido(): 
     estadoPedido=[]
     estadoPedidoVistos=set()

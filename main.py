@@ -16,6 +16,7 @@ import json
 import tabulate
 import requests
 
+
 def menuProducto():
     while True:
         os.system("clear")
@@ -166,52 +167,3 @@ MENU PRINCIPAL
                break
         except ValueError:
             print("Error generado")
-
-def menuActualizacionProducto():
-    while True:
-        os.system("clear")
-        print("""
-MENU DE ACTUALIZACION
-1. Actualizar el codigo del producto
-2. Actualizar el nombre del producto
-3. Actualizar la gama del producto
-4. Actualizar las dimensiones
-5. Actualizar el proveedor del producto
-6. Actualizar la descripcion del producto
-7. Actualizar la cantidad en stock del producto
-8. Actualizar el precio de venta del producto
-9. Actualizar el precio del proveedor del producto
-10. Actualizar todos los datos
-              """)
-        op=(input("Seleccione una de las opciones: "))
-        if(re.match(r'[0-10]$', op)is not None):
-            op=int(op)
-        if(op==1):
-                codigo=input("Ingrese el codigo del producto: ")
-                if(re.match(r'^[A-Z]{2}-[0-9]{2,3}$',codigo)is not None):
-                    data=(pr.getProductCodigo2(codigo))
-                if(data):
-                    print(tabulate(data,headers="keys", tablefmt="grid"))
-                    raise Exception("El producto ya existe")
-                else:
-                    pr["codigo_producto"]=codigo
-        else:
-            raise Exception("El codigo del producto no cumple con el estandar establecido")
-        pet=requests.put(f"http://154.38.171.54:5008/productos/{id}", data=json.dumps(producto))
-        res=pet.json()
-        res["Mensaje"] = "Producto Guardado"
-        return [res]
-    # else:
-        # return[{
-        #      "message": "Producto no encontrado",
-        #      "id": id
-        #  }]
-        # if(op==2):
-        #         nombre=input("Ingrese el nombre del producto: ")
-        #         if(re.match(r'^([A-Za-z][a-z]*\s*)+$',nombre)is not None):
-        #             producto["nombre"]=nombre
-        #         else:
-        #             raise Exception("El nombre del producto no cumple con el estandar establecido")
-        # elif(op==0):
-        #     break  
-    

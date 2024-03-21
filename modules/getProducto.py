@@ -9,10 +9,15 @@ def getAllData():
 def getProductCodigo(codigo):
     pet=requests.get(f"http://154.38.171.54:5008/productos/{codigo}")
     return [pet.json()] if pet.ok else[]
+# def getProductCodigo1(id):
+#     pet=requests.get(f"http://154.38.171.54:5008/productos/{id}")
+#     return [pet.json()] if pet.ok else[]
 def getProductCodigo2(codigo):
-    for val in getAllData():
-        if(val.get("codigo_producto") == codigo):
-             return [val]
+    pet=requests.get(f"http://154.38.171.54:5008/productos/{codigo}")
+    data=pet.json()
+    if(len(data)==0):
+        data=None
+        return data
 def getAllProductosOrnamentales(gama,stock):
     condiciones=[]
     for val in getAllData():

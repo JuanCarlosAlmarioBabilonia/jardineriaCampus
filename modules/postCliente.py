@@ -136,13 +136,10 @@ def deleteCliente(id):
             except Exception as error:
                 print(error)
     else:
-        return{
-            "Body":[{
-            "Mensaje":"El producto no ha sido encontrado",
-            "ID":id
-            }],
-            "Status":400
-        }
+        return[{
+            "message": "Producto no encontrado",
+            "id": id
+        }]   
 def updateCliente(id):
     data=gC.getClienteCodigo(id)
     if(len(data)):

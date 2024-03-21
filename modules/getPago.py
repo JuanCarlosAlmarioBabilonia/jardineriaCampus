@@ -10,6 +10,9 @@ def getPagoCodigo(codigo):
     for val in getAllDataPa():
         if(val.get("codigo_cliente") == codigo):
             return [val]
+def getPagoCodigo(codigo):
+    pet=requests.get(f"http://154.38.171.54:5006/pagos/{codigo}")
+    return [pet.json()] if pet.ok else[]
 def getCodigoClientePago(): 
     codigoCliente=[]
     codigosVistos=set()
