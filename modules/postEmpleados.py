@@ -2,7 +2,6 @@ import json
 import requests
 from tabulate import tabulate
 import os
-import modules.getPuestos as gPu
 import modules.getEmpleados as gEm
 import re
 import modules.getCodeOficina as gCof
@@ -74,7 +73,8 @@ def postEmpleados():
 1. Subdirector Marketing
 2. Secretaria
 3. Director General
-4. Representante Ventas""")
+4. Representante Ventas
+""")
             if(re.match(r'^[A-Z][a-z]*( [A-Z][a-z]*)*$',puesto)is not None):
                 print(tabulate(data, headers="keys",tablefmt="grid"))
                 empleado["puesto"]=puesto
@@ -85,7 +85,7 @@ def postEmpleados():
             print(error)
     pet=requests.post("http://154.38.171.54:5003/empleados", data=json.dumps(empleado))
     res=pet.json()
-    res["Mensaje"] = "Producto Guardado"
+    res["Mensaje"] = "Empleado Guardado"
     return [res]
 def deleteEmpleado(id):
     data=gEm.getAllCodeEmp(id)
@@ -103,7 +103,7 @@ def deleteEmpleado(id):
                         if (afirm==1):
                             pet=requests.delete(f"http://154.38.171.54:5003/empleados/{id}")
                             if(pet.status_code==204):
-                                return[{"Mensaje": "El producto ha sido eliminado satisfactoriamente"}]
+                                return[{"Mensaje": "El empleado ha sido eliminado satisfactoriamente"}]
                             break
                         else:
                             return[{"Mensaje": "Eliminacion cancelada"}]
@@ -114,7 +114,7 @@ def deleteEmpleado(id):
                 print(error)
     else:
         return[{
-            "message": "Producto no encontrado",
+            "message": "Empleado no encontrado",
             "id": id
         }]  
 def updateEmpleado(id):
@@ -130,11 +130,11 @@ def updateEmpleado(id):
                         data=gEm.getAllCodeEmp(codigo_empleado)
                         if (data):
                             print(tabulate(data,tablefmt="grid"))
-                            raise Exception("El codigo ya pertenece a un cliente")
+                            raise Exception("El codigo ya pertenece a un empleado")
                         else:    
                             empleado["codigo_empleado"]=codigo_empleado
                     else:
-                        raise Exception("El codigo del cliente no cumple con el estandar establecido")
+                        raise Exception("El codigo del empleado no cumple con el estandar establecido")
                 
                 if(not empleado.get("nombre")):
                     nombre=input("Ingrese su nombre: ")
@@ -186,7 +186,8 @@ def updateEmpleado(id):
 1. Subdirector Marketing
 2. Secretaria
 3. Director General
-4. Representante Ventas""")
+4. Representante Ventas
+""")
                 if(re.match(r'^[A-Z][a-z]*( [A-Z][a-z]*)*$',puesto)is not None):
                     print(tabulate(data, headers="keys",tablefmt="grid"))
                     empleado["puesto"]=puesto
@@ -197,7 +198,7 @@ def updateEmpleado(id):
                 print(error)
     pet=requests.put(f"http://154.38.171.54:5003/empleados/{id}", data=json.dumps(empleado))
     res=pet.json()
-    res["Mensaje"] = "Producto Guardado"
+    res["Mensaje"] = "Empleado Guardado"
     return [res]
 
 def menu():
@@ -215,14 +216,14 @@ ADMINISTRACION DE EMPLEADOS
             op=int(op)
         if(op==1):
             print(tabulate(postEmpleados(),tablefmt="grid"))
-            input("Precione una tecla para continuar.....")
+            input("Presione una tecla para continuar.....")
         elif(op==2):
-            idProducto=(input("Ingrese el id del empleado que desea eliminar:"))
+            idProducto=int(input("Ingrese el id del empleado que desea eliminar:"))
             print(tabulate(deleteEmpleado(idProducto),tablefmt="grid"))
-            input("...")
+            input("Presione una tecla para continuar.....")
         elif(op==3):
-            idProducto=(input("Ingrese el id del empleado que desea actualizar:"))
+            idProducto=int(input("Ingrese el id del empleado que desea actualizar:"))
             print(tabulate(updateEmpleado(idProducto),tablefmt="grid"))
-            input("...")
+            input("Presione una tecla para continuar.....")
         elif(op== 0):
             break

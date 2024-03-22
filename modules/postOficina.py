@@ -75,12 +75,11 @@ def postOficina():
             print(error)
     pet=requests.post("http://154.38.171.54:5005/oficinas", data=json.dumps(oficina))
     res=pet.json()
-    res["Mensaje"] = "Producto Guardado"
+    res["Mensaje"] = "Oficina Guardada"
     return [res]
 def deleteOficina(id):
     data=gO.getOficinaCodigo(id)
     if(len(data)):
-        oficina=dict()
         while True:
             try:  
                 print("""
@@ -105,7 +104,7 @@ def deleteOficina(id):
                 print(error)
     else:
         return[{
-            "message": "Producto no encontrado",
+            "message": "Oficina no encontrada",
             "id": id
         }]      
 def updateOficina(id):
@@ -115,7 +114,7 @@ def updateOficina(id):
         while True:
             try:
                 if(not oficina.get("codigo_oficina")):
-                    codigo_oficina=input("Ingrese el codigo del producto: ")
+                    codigo_oficina=input("Ingrese el codigo de la oficina: ")
                     if(re.match(r'^[A-Z]{3}-[A-Z]{2}$',codigo_oficina)is not None):
                         data=(gO.getOficinaCodigo(codigo_oficina))
                     if(data):
@@ -171,7 +170,7 @@ def updateOficina(id):
                         raise Exception("Su linea de direccion principal no cumple con el estandar establecido")   
                     
                 if(not oficina.get("linea_direccion2")):
-                    linea_direccion2=input("Ingrese su direccion principal: ")
+                    linea_direccion2=input("Ingrese su direccion secundaria: ")
                     if(re.match(r'^[0-9A-Za-z\s]+$',linea_direccion2)is not None):
                         oficina["linea_direccion2"]=linea_direccion2
                         break
@@ -181,11 +180,11 @@ def updateOficina(id):
                 print(error)
         pet=requests.put(f"http://154.38.171.54:5005/oficinas/{id}", data=json.dumps(oficina))
         res=pet.json()
-        res["Mensaje"] = "Producto Guardado"
+        res["Mensaje"] = "Oficina Guardada"
         return [res]
     else:
         return[{
-            "message": "Producto no encontrado",
+            "message": "Oficina no encontrada",
             "id": id
         }]                
 def menu():
@@ -203,14 +202,14 @@ ADMINISTRACION DE OFICINAS
             op=int(op)
         if(op==1):
             print(tabulate(postOficina(),tablefmt="grid"))
-            input("Precione una tecla para continuar.....")
+            input("Presione una tecla para continuar.....")
         elif(op==2):
-            idProducto=(input("Ingrese el id de la oficina que desea eliminar:"))
+            idProducto=int(input("Ingrese el id de la oficina que desea eliminar:"))
             print(tabulate(deleteOficina(idProducto),tablefmt="grid"))
-            input("...")
+            input("Presione una tecla para continuar.....")
         elif(op==3):
-            idProducto=(input("Ingrese el id del oficina que desea actualizar:"))
+            idProducto=int(input("Ingrese el id del oficina que desea actualizar:"))
             print(tabulate(updateOficina(idProducto),tablefmt="grid"))
-            input("...")
+            input("Presione una tecla para continuar.....")
         elif(op== 0):
             break

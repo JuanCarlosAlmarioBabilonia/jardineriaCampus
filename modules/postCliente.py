@@ -4,7 +4,6 @@ from tabulate import tabulate
 import os
 import re
 import modules.getClientes as gC
-import modules.getCodeEmp as gCem
 def postCliente():
     cliente=dict()
     while True:
@@ -160,7 +159,7 @@ def deleteCliente(id):
                 print(error)
     else:
         return[{
-            "message": "Producto no encontrado",
+            "message": "Cliente no encontrado",
             "id": id
         }]   
 def updateCliente(id):
@@ -227,7 +226,7 @@ def updateCliente(id):
                             raise Exception("Su linea de direccion principal no cumple con el estandar establecido")   
                     
                     if(not cliente.get("linea_direccion2")):
-                        linea_direccion2=input("Ingrese su direccion principal: ")
+                        linea_direccion2=input("Ingrese su direccion secundaria: ")
                         if(re.match(r'^[0-9A-Za-z\s]+$',linea_direccion2)is not None):
                             cliente["linea_direccion2"]=linea_direccion2
                         else:
@@ -259,7 +258,7 @@ def updateCliente(id):
                             raise Exception("Su codigo postal no cumple con el estandar establecido")  
                     
                     if not cliente.get("codigo_empleado_rep_ventas"):
-                        codigo_empleado_rep_ventas= (input("""Ingrese su representante (codigo)
+                        codigo_empleado_rep_ventas= input("""Escriba su representante (codigo)
 1. 5
 2. 8
 3. 9
@@ -270,12 +269,12 @@ def updateCliente(id):
 8. 22
 9. 30
 10. 31
-"""))
+""")
                     if(re.match(r'^[0-9]{1,2}$',codigo_empleado_rep_ventas)is not None): 
                         codigo_empleado_rep_ventas=int(codigo_empleado_rep_ventas)
                         cliente["codigo_empleado_rep_ventas"] = codigo_empleado_rep_ventas
                     else:
-                        raise Exception("El estado del producto no cumple con el estándar establecido") 
+                        raise Exception("El codigo no cumple con el estándar establecido") 
                                 
                     if(not cliente.get("limite_credito")):
                         limite_credito=input("Ingrese su limite de credito: ")
@@ -298,11 +297,11 @@ def updateCliente(id):
                     print(error)  
             pet=requests.put(f"http://154.38.171.54:5001/cliente/{id}", data=json.dumps(cliente))
             res=pet.json()
-            res["Mensaje"] = "Producto Guardado"
+            res["Mensaje"] = "Cliente Guardado"
             return [res]
     else:
         return[{
-            "message": "Producto no encontrado",
+            "message": "Cliente no encontrado",
             "id": id
         }]   
 def menu():
@@ -320,14 +319,14 @@ ADMINISTRACION DE CLIENTES
             op=int(op)
         if(op==1):
             print(tabulate(postCliente(),tablefmt="grid"))
-            input("Precione una tecla para continuar.....")
+            input("Presione una tecla para continuar.....")
         elif(op==2):
             idProducto=int(input("Ingrese el id del cliente que desea eliminar:"))
             print(tabulate(deleteCliente(idProducto),tablefmt="grid"))
-            input("...")
+            input("Presione una tecla para continuar.....")
         elif(op==3):
             idProducto=int(input("Ingrese el id del cliente que desea actualizar:"))
             print(tabulate(updateCliente(idProducto),tablefmt="grid"))
-            input("...")
+            input("Presione una tecla para continuar.....")
         elif(op== 0):
             break

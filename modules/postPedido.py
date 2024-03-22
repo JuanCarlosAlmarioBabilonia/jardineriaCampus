@@ -3,7 +3,6 @@ import requests
 from tabulate import tabulate
 import os
 import re
-import modules.getEstados as gE
 import modules.getPedido as gPed
 def postPedido():
     pedido=dict()
@@ -43,7 +42,7 @@ def postPedido():
                 raise Exception("La fecha de entrega no cumple con el estandar establecido")
             
             if not pedido.get("estado"):
-                estado= input("""Ingrese su estado
+                estado= input("""Escriba su estado
 1. Entregado
 2. Pendiente
 3. Rechazado
@@ -73,7 +72,7 @@ def postPedido():
             print(error)
     pet=requests.post("http://154.38.171.54:5007/pedidos", data=json.dumps(pedido))
     res=pet.json()
-    res["Mensaje"] = "Producto Guardado"
+    res["Mensaje"] = "Pedido Guardado"
     return [res]
 def deletePedido(id):
     data=gPed.getPedidoCode(id)
@@ -102,7 +101,7 @@ def deletePedido(id):
                 print(error)
     else:
         return[{
-            "message": "Producto no encontrado",
+            "message": "Pedido no encontrado",
             "id": id
         }]  
 def updatePedido(id):
@@ -145,7 +144,7 @@ def updatePedido(id):
                             raise Exception("La fecha de entrega no cumple con el estandar establecido")
                     
                     if not pedido.get("estado"):
-                        estado= input("""Ingrese su estado
+                        estado= input("""Escriba su estado
         1. Entregado
         2. Pendiente
         3. Rechazado
@@ -175,7 +174,7 @@ def updatePedido(id):
                     print(error)
             pet=requests.put(f"http://154.38.171.54:5007/pedidos/{id}", data=json.dumps(pedido))
             res=pet.json()
-            res["Mensaje"] = "Producto Guardado"
+            res["Mensaje"] = "Pedido Guardado"
             return [res]    
 def menu():
     while True:
@@ -192,14 +191,14 @@ ADMINISTRACION DE PEDIDOS
             op=int(op)
         if(op==1):
             print(tabulate(postPedido(),tablefmt="grid"))
-            input("Precione una tecla para continuar.....")
+            input("Presione una tecla para continuar.....")
         elif(op==2):
-            idProducto=(input("Ingrese el id del pedido que desea eliminar:"))
+            idProducto=int(input("Ingrese el id del pedido que desea eliminar:"))
             print(tabulate(deletePedido(idProducto),tablefmt="grid"))
-            input("...")
+            input("Presione una tecla para continuar.....")
         elif(op==3):
-            idProducto=(input("Ingrese el id del pedido que desea actualizar:"))
+            idProducto=int(input("Ingrese el id del pedido que desea actualizar:"))
             print(tabulate(updatePedido(idProducto),tablefmt="grid"))
-            input("...")
+            input("Presione una tecla para continuar.....")
         elif(op== 0):
             break

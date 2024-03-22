@@ -2,7 +2,6 @@ import json
 import requests
 from tabulate import tabulate
 import os
-import modules.getFormasPago as fPago
 import re
 import modules.getClientes as gC
 import modules.getPago as gPa
@@ -62,7 +61,7 @@ def postPagos():
             print(error)
     pet=requests.post("http://154.38.171.54:5006/pagos", data=json.dumps(pagos))
     res=pet.json()
-    res["Mensaje"] = "Producto Guardado"
+    res["Mensaje"] = "Pago Guardado"
     return [res]
 def deletePagos(id):
     data=gPa.getPagoCodigo(id)
@@ -91,7 +90,7 @@ def deletePagos(id):
                 print(error)
     else:
         return[{
-            "message": "Producto no encontrado",
+            "message": "Pago no encontrado",
             "id": id
         }]  
 def updatePagos(id):
@@ -114,7 +113,7 @@ def updatePagos(id):
                         raise Exception("El codigo del cliente no cumple con el estandar establecido")
             
                 if (not pagos.get("forma_pago")):
-                    forma_pago= input("""Ingrese su forma de pago
+                    forma_pago= input("""Escriba su forma de pago
 1. Paypal
 2. Transferencia
 3. Cheque
@@ -150,7 +149,7 @@ def updatePagos(id):
                 print(error)
         pet=requests.put(f"http://154.38.171.54:5006/pagos/{id}", data=json.dumps(pagos))
         res=pet.json()
-        res["Mensaje"] = "Producto Guardado"
+        res["Mensaje"] = "Pago Guardado"
         return [res]
 def menu():
     while True:
@@ -169,12 +168,12 @@ ADMINISTRACION DE PAGOS
             print(tabulate(postPagos(),tablefmt="grid"))
             input("Presione una tecla para continuar.....")
         elif(op==2):
-            idProducto=(input("Ingrese el id del pago que desea eliminar: "))
+            idProducto=int(input("Ingrese el id del pago que desea eliminar: "))
             print(tabulate(deletePagos(idProducto),tablefmt="grid"))
-            input("...")
+            input("Presione una tecla para continuar.....")
         elif(op==3):
-            idProducto=(input("Ingrese el id del producto que desea actualizar:"))
+            idProducto=int(input("Ingrese el id del pago que desea actualizar:"))
             print(tabulate(updatePagos(idProducto),tablefmt="grid"))
-            input("...")
+            input("Presione una tecla para continuar.....")
         elif(op== 0):
             break

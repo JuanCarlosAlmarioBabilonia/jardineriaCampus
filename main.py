@@ -24,7 +24,7 @@ def menuProducto():
 MENU DE PRODUCTOS
 0. Regresar al menu principal
 1. Redireccionar a los filtros
-2. Guardar datos
+2. Guardar, actualizar y/o eliminar datos
               """)
         op=(input("Seleccione una de las opciones: "))
         if(re.match(r'[0-2]$', op)is not None):
@@ -43,7 +43,7 @@ def menuCliente():
 MENU DE CLIENTES
 0. Regresar al menu principal
 1. Redireccionar a los filtros
-2. Guardar datos
+2. Guardar, actualizar y/o eliminar datos
               """)
         op=(input("Seleccione una de las opciones: "))
         if(re.match(r'[0-2]$', op)is not None):
@@ -62,7 +62,7 @@ def menuEmpleado():
 MENU DE EMPLEADOS
 0. Regresar al menu principal
 1. Redireccionar a los filtros
-2. Guardar datos
+2. Guardar, actualizar y/o eliminar datos
               """)
         op=(input("Seleccione una de las opciones: "))
         if(re.match(r'[0-2]$', op)is not None):
@@ -80,7 +80,7 @@ def menuPagos():
 MENU DE PAGOS
 0. Regresar al menu principal
 1. Redireccionar a los filtros
-2. Guardar datos
+2. Guardar, actualizar y/o eliminar datos
               """)
         op=(input("Seleccione una de las opciones: "))
         if(re.match(r'[0-2]$', op)is not None):
@@ -98,7 +98,7 @@ def menuOficina():
 MENU DE OFICINA
 0. Regresar al menu principal
 1. Redireccionar a los filtros
-2. Guardar datos
+2. Guardar, actualizar y/o eliminar datos
               """)
         op=(input("Seleccione una de las opciones: "))
         if(re.match(r'[0-2]$', op)is not None):
@@ -116,7 +116,7 @@ def menuPedidos():
 MENU DE PEDIDOS
 0. Regresar al menu principal
 1. Redireccionar a los filtros
-2. Guardar datos
+2. Guardar, actualizar y/o eliminar datos
               """)
         op=(input("Seleccione una de las opciones: "))
         if(re.match(r'[0-2]$', op)is not None):

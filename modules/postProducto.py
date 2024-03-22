@@ -227,12 +227,12 @@ ADMINISTRACION DE PRODUCTOS
             print(tabulate(postProducto(),tablefmt="grid"))
             input("Presione una tecla para continuar.....")
         elif(op==2):
-            idProducto=(input("Ingrese el id del producto que desea eliminar:"))
+            idProducto=int(input("Ingrese el id del producto que desea eliminar:"))
             print(tabulate(deleteProducto(idProducto),tablefmt="grid"))
-            input("...")
+            input("Presione una tecla para continuar.....")
         elif(op==3):
-            idProducto=(input("Ingrese el id del producto que desea actualizar:"))
+            idProducto=int(input("Ingrese el id del producto que desea actualizar:"))
             print(tabulate(updateProducto(idProducto),tablefmt="grid"))
-            input("...")
+            input("Presione una tecla para continuar.....")
         elif(op== 0):
             break
