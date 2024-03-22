@@ -93,10 +93,10 @@ def deleteOficina(id):
                         if (afirm==1):
                             pet=requests.delete(f"http://154.38.171.54:5005/oficinas/{id}")
                             if(pet.status_code==204):
-                                return[{"Mensaje": "La oficina ha sido eliminado satisfactoriamente"}]
+                                return print("El producto ha sido eliminado satisfactoriamente")
                             break
                         else:
-                            return[{"Mensaje": "Eliminacion cancelada"}]
+                            return print("Eliminacion cancelada")
                         
                 else:
                     raise Exception("El dato ingresado no esta comprendido entre los estandares solicitados")
